@@ -41,6 +41,7 @@ public class Mover : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        GameManager.SetGameMode(0);
     }
     private void Awake()
     {
@@ -77,11 +78,24 @@ public class Mover : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (GameManager.gameMode == 0) CafeMode();
+        else if (GameManager.gameMode == 1) PlatformerMode();
+    }
+    private void CafeMode()
+    {
+        Vector2 moveInput = inputReader.GetMoveInput();
+        velocity = rb.velocity;
+        CafeMove(moveInput);
+        rb.velocity = velocity;
+    }
+
+    private void PlatformerMode()
+    {
         Vector2 moveInput = inputReader.GetMoveInput();
         bool jumpInput = inputReader.GetJumpInput();
         velocity = rb.velocity;
         CheckIfGrounded();
-        Move(moveInput);
+        PlatformerMove(moveInput);
         Jump(jumpInput);
         if (velocity.y < downwardVelocityCap)
         {
@@ -108,7 +122,12 @@ public class Mover : MonoBehaviour
         }
 
     }
-    private void Move(Vector2 input)
+    private void CafeMove(Vector2 input)
+    {
+        Vector2 direction = input.normalized;
+        velocity = direction * 6;
+    }
+    private void PlatformerMove(Vector2 input)
     {
         Vector2 direction = new Vector2(input.x, 0);
         direction = direction.normalized;
