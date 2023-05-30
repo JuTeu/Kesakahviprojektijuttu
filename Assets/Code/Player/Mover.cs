@@ -125,6 +125,7 @@ public class Mover : MonoBehaviour
     private void CafeMove(Vector2 input)
     {
         Vector2 direction = input.normalized;
+        if (direction.x != 0) sprite.flipX = direction.x > 0f;
         velocity = direction * 6;
     }
     private void PlatformerMove(Vector2 input)
