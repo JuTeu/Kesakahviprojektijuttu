@@ -32,6 +32,7 @@ public class CafeDoorTrigger : MonoBehaviour
     void Update()
     {
         CameraMovement();
+        
         if (playerIsInStorageRoom && room1Opacity > 0)
         {
             room1Opacity -= 2 * Time.deltaTime;
@@ -42,6 +43,8 @@ public class CafeDoorTrigger : MonoBehaviour
             room1Opacity += 2 * Time.deltaTime;
             room1Sprite.color = new Color(1, 1, 1, room1Opacity);
         }
+
+        // Tapahtuu kerran kun pelaaja poistuu tai menee huoneeseen
         if (playerIsInStorageRoom != playerWasInStorageRoom)
         {
             playerWasInStorageRoom = playerIsInStorageRoom;

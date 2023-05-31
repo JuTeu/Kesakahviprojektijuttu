@@ -115,7 +115,10 @@ public class Mover : MonoBehaviour
     }
     private void CheckIfGrounded()
     {
-        onGround = Physics2D.Raycast(pos.position + posOffset, Vector2.down, 0.6f, groundLayer) || Physics2D.Raycast(pos.position, Vector2.down, 0.6f, groundLayer) || Physics2D.Raycast(pos.position - posOffset, Vector2.down, 0.6f, groundLayer);
+        onGround = Physics2D.Raycast(
+            pos.position + posOffset, Vector2.down, 0.6f, groundLayer) ||
+            Physics2D.Raycast(pos.position, Vector2.down, 0.6f, groundLayer) ||
+            Physics2D.Raycast(pos.position - posOffset, Vector2.down, 0.6f, groundLayer);
         if (onGround) 
         {
             coyoteTime = maxCoyoteTime;
@@ -125,7 +128,7 @@ public class Mover : MonoBehaviour
     private void CafeMove(Vector2 input)
     {
         Vector2 direction = input.normalized;
-        if (direction.x != 0) sprite.flipX = direction.x > 0f;
+        if (direction.x != 0) sprite.flipX = direction.x < 0f;
         velocity = direction * 6;
     }
     private void PlatformerMove(Vector2 input)
