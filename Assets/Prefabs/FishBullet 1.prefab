@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2603007252200294029}
   - component: {fileID: 2603007252200294018}
   m_Layer: 0
-  m_Name: FishBullet
+  m_Name: FishBullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a0f5234fa46e504096c9ab0a2e98cc5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4caae3c1f5c49144ab1353bd46240488, type: 3}
   m_Color: {r: 0.8773585, g: 0.12829298, b: 0.12829298, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -98,7 +98,7 @@ CapsuleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
@@ -136,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07f0977e7690bc4e98ef032719f841a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.62
-  lifeTime: 3
+  speed: 1.12
+  lifeTime: 4.78
