@@ -36,7 +36,7 @@ public class makeOrder : MonoBehaviour
 
     private void makeLatte()
     {
-        StartCoroutine(latteMaking);
+        StartCoroutine(latteMaking());
     }
 
     IEnumerator latteMaking()
