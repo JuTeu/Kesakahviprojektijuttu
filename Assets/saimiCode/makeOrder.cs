@@ -15,9 +15,12 @@ public class makeOrder : MonoBehaviour
     public Button beanType1;
     public Button beanType2;
     public Button normalMilk;
-    /*private string chosenCup;
-    private string chosenBean;
-    private string chosenMilk;*/
+    /*private string chosenCup = "";
+    private string chosenBean = "";
+    private string chosenMilk = "";*/
+    private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
+    private string playerRecipe = "";
+    private string selectedOrder = "";
 
     private void Start()
     {
@@ -26,7 +29,7 @@ public class makeOrder : MonoBehaviour
         chooseBean.SetActive(false);
         chooseMilk.SetActive(false);
     }
-    /*public void acceptOrder()
+    public void acceptOrder()
     {
         if (this.gameObject.name == "OrderLatte")
         {
@@ -36,16 +39,15 @@ public class makeOrder : MonoBehaviour
 
     private void makeLatte()
     {
-        StartCoroutine(latteMaking());
+        latteMaking();
     }
 
-    IEnumerator latteMaking()
+    public void latteMaking()
     {
-        var waitForButtons = new WaitForUIButtons(latteCup, normalCup, beanType1, beanType2, normalMilk);
-        yield return waitForButtons.Reset();
         chooseOrder.SetActive(false);
         chooseCup.SetActive(true);
-        if (waitForButtons.PressedButton != latteCup)
+        selectedOrder = "Latte";
+        /*if (chosenCup != "latteCup" && chosenCup != "")
         {
             Debug.Log("Wrong cup! try again");
             chooseCup.SetActive(false);
@@ -57,7 +59,7 @@ public class makeOrder : MonoBehaviour
             chooseCup.SetActive(false);
             chooseBean.SetActive(true);
         }
-        if (waitForButtons.PressedButton != beanType1)
+        if (chosenBean != "beanType1" && chosenBean != "")
         {
             Debug.Log("Wrong bean! try again");
             chooseBean.SetActive(false);
@@ -69,7 +71,7 @@ public class makeOrder : MonoBehaviour
             chooseBean.SetActive(false);
             chooseMilk.SetActive(true);
         }
-        if (waitForButtons.PressedButton != normalMilk)
+        if (chosenMilk != "normalMilk" && chosenMilk != "")
         {
             Debug.Log("Wrong milk! try again");
             chooseMilk.SetActive(false);
@@ -81,37 +83,110 @@ public class makeOrder : MonoBehaviour
             chooseMilk.SetActive(false);
             chooseOrder.SetActive(true);
             Destroy(this.gameObject);
-        }
-    }*/
+        }*/
+    }
 
-    /*public void chooseCorrectCup(Button btn)
+    public void chooseCorrectCup(Button btn)
     {
         if (btn.name == "latteCup")
         {
-            chosenCup = "latteCup";
+            playerRecipe = string.Concat(playerRecipe, 'L');
         }
         else if (btn.name =="normalCup")
         {
-            chosenCup = "normalCup";
+            playerRecipe = string.Concat(playerRecipe, 'N');;
+        }
+        switch (selectedOrder)
+        {
+            case "Latte":
+            if (compareRecipes(latteRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong cup! try again");
+                chooseCup.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+            }
+            else
+            {
+                Debug.Log("Latte cup chosen");
+                chooseCup.SetActive(false);
+                chooseBean.SetActive(true);
+            }
+            break;
         }
     }
     public void chooseCorrectBean(Button btn)
     {
         if (btn.name == "beanType1")
         {
-            chosenBean = "beanType1";
+            playerRecipe = string.Concat(playerRecipe, '1');;
         }
         else if (btn.name == "beanType2")
         {
-            chosenBean = "beanType2";
+            playerRecipe = string.Concat(playerRecipe, '2');;
+        }
+        switch (selectedOrder)
+        {
+            case "Latte":
+            if (compareRecipes(latteRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong bean! try again");
+                chooseBean.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+            }
+            else
+            {
+                Debug.Log("Correct bean chosen");
+                chooseBean.SetActive(false);
+                chooseMilk.SetActive(true);
+            }
+            break;
         }
     }
-
     public void chooseCorrectMilk(Button btn)
     {
         if (btn.name == "normalMilk")
         {
-            chosenMilk = "normalMilk";
+            playerRecipe = string.Concat(playerRecipe, 'M');;
         }
-    }*/
+        switch (selectedOrder)
+        {
+            case "Latte":
+            if (compareRecipes(latteRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong milk! try again");
+                chooseMilk.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+            }
+            else
+            {
+                Debug.Log("Good job! you completed the order and earned 20 coins!");
+                chooseMilk.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                Destroy(this.gameObject);
+            }
+            break;
+        }
+    }
+    private bool compareRecipes(string attemptedRecipe, string playerRecipe)
+    {
+        if (playerRecipe != "")
+        {
+            char[] p = playerRecipe.ToCharArray();
+            char[] c = attemptedRecipe.ToCharArray();
+            int length = playerRecipe.Length;
+            if (p[length - 1] == c[length - 1])
+            {
+                Debug.Log("Returned true");
+                return true;
+            }
+        Debug.Log("Returned false");
+        return false;
+        }
+    Debug.Log("Returned false");
+    return false;
+    }
 }
