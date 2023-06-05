@@ -14,14 +14,18 @@ public class makeOrder : MonoBehaviour
     private string playerRecipe = "";
     private string selectedOrder = "";
 
-    private void Start()
+
+    //TODO: 1: Add a back button to stop making an order and go back
+    //2: add counter for money
+
+    private void Start() //hide ingredients bcs no order is selected yet
     {
         chooseOrder.SetActive(true);
         chooseCup.SetActive(false);
         chooseBean.SetActive(false);
         chooseMilk.SetActive(false);
     }
-    public void acceptOrder()
+    public void acceptOrder() //Adding more orders here later with more drinks. Maybe switch case is better used later.
     {
         if (this.gameObject.name == "OrderLatte")
         {
@@ -29,18 +33,16 @@ public class makeOrder : MonoBehaviour
         }
     }
 
-    private void makeLatte()
-    {
-        latteMaking();
-    }
-
-    public void latteMaking()
+    private void makeLatte() // defines what order is being made
     {
         chooseOrder.SetActive(false);
         chooseCup.SetActive(true);
         selectedOrder = "Latte";
     }
 
+
+    // all of these functions check what ingredient is selected, compares that recipe to the recipe (string) what the user is building.
+    // if at any point the recipe is wrong, it resets the users recipe (string) and goes back to choose order
     public void chooseCorrectCup(Button btn)
     {
         if (btn.name == "latteCup")
