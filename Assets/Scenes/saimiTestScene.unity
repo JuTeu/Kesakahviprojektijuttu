@@ -432,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &417678817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5530,3 +5530,8 @@ MonoBehaviour:
   chooseOrder: {fileID: 1960772415}
   chooseBean: {fileID: 122813822}
   chooseMilk: {fileID: 2085216973}
+  latteCup: {fileID: 0}
+  normalCup: {fileID: 0}
+  beanType1: {fileID: 0}
+  beanType2: {fileID: 0}
+  normalMilk: {fileID: 0}
