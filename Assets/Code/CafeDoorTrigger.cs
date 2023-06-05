@@ -9,6 +9,7 @@ public class CafeDoorTrigger : MonoBehaviour
     Transform cam;
     [SerializeField] Collider2D room1, room2;
     [SerializeField] SpriteRenderer room1Sprite, doorFrameSprite;
+    SpriteRenderer[] room1ChildSprites;
     [SerializeField] Vector2 mainView, storageView;
     Vector2 targetPos, currentPos;
     Collider2D col;
@@ -18,6 +19,7 @@ public class CafeDoorTrigger : MonoBehaviour
         col = GetComponent<Collider2D>();
         cam = Camera.main.transform;
         targetPos = mainView;
+        room1ChildSprites = room1Sprite.gameObject.GetComponentsInChildren<SpriteRenderer>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -37,11 +39,19 @@ public class CafeDoorTrigger : MonoBehaviour
         {
             room1Opacity -= 2 * Time.deltaTime;
             room1Sprite.color = new Color(1, 1, 1, room1Opacity);
+            foreach (SpriteRenderer room1ChildSprite in room1ChildSprites)
+            {
+                room1ChildSprite.color = new Color(1, 1, 1, room1Opacity);
+            }
         }
         else if (!playerIsInStorageRoom && room1Opacity < 1)
         {
             room1Opacity += 2 * Time.deltaTime;
             room1Sprite.color = new Color(1, 1, 1, room1Opacity);
+            foreach (SpriteRenderer room1ChildSprite in room1ChildSprites)
+            {
+                room1ChildSprite.color = new Color(1, 1, 1, room1Opacity);
+            }
         }
 
         // Tapahtuu kerran kun pelaaja poistuu tai menee huoneeseen

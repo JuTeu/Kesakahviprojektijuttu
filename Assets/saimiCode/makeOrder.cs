@@ -26,7 +26,7 @@ public class makeOrder : MonoBehaviour
         chooseBean.SetActive(false);
         chooseMilk.SetActive(false);
     }
-    public void acceptOrder()
+    /*public void acceptOrder()
     {
         if (this.gameObject.name == "OrderLatte")
         {
@@ -82,7 +82,7 @@ public class makeOrder : MonoBehaviour
             chooseOrder.SetActive(true);
             Destroy(this.gameObject);
         }
-    }
+    }*/
 
     /*public void chooseCorrectCup(Button btn)
     {

@@ -19,12 +19,15 @@ public class Mover : MonoBehaviour
     [SerializeField] private float downwardVelocityCap = -8;
     [SerializeField] private float extraFallingSpeed = 3;
     [SerializeField] private bool variableJumpHeight = true;
+
+    [SerializeField] private float playerCafeScalingModifier = 0.1f;
     private float coyoteTime = 0;
     private InputReader inputReader;
     private Rigidbody2D rb;
     private Collider2D col;
-    private SpriteRenderer sprite;
-    //private Animator anim;
+    [SerializeField] private SpriteRenderer sprite;
+    private Transform spriteScale;
+    [SerializeField] private Animator anim;
     private string currentAnimation;
     private Transform pos;
     private Vector3 posOffset;
@@ -53,14 +56,17 @@ public class Mover : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         pos = GetComponent<Transform>();
-        sprite = GetComponent<SpriteRenderer>();
+        //sprite = GetComponent<SpriteRenderer>();
         //anim = GetComponent<Animator>();
         velocity = new Vector2();
         posOffset = new Vector3(0.45f, 0f, 0f);
         if (rb == null) {
             Debug.LogError($"{gameObject} is missing the RigidBody2D component!");
         }
+
+        spriteScale = sprite.gameObject.GetComponent<Transform>();
     }
+    private float playerScale;
     private void Update()
     {
         if (coyoteTime > 0)
@@ -74,6 +80,13 @@ public class Mover : MonoBehaviour
         if (jumpBuffer > 0)
         {
             jumpBuffer = jumpBuffer - Time.deltaTime;
+        }
+
+        if (GameManager.gameMode == 0)
+        {
+            playerScale = 1 - spriteScale.position.y * playerCafeScalingModifier;
+            spriteScale.localScale = new Vector2(playerScale, playerScale);
+            spriteScale.position = new Vector3(spriteScale.position.x, spriteScale.position.y, transform.position.y);
         }
     }
     private void FixedUpdate()
