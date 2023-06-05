@@ -369,6 +369,7 @@ GameObject:
   - component: {fileID: 406475527}
   - component: {fileID: 406475533}
   - component: {fileID: 406475534}
+  - component: {fileID: 406475535}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -407,7 +408,8 @@ MonoBehaviour:
   variableJumpHeight: 1
   playerCafeScalingModifier: 0.1
   sprite: {fileID: 940157142}
-  anim: {fileID: 940157143}
+  anim: {fileID: 406475535}
+  attackFinished: 1
 --- !u!114 &406475528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,6 +569,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e3097c2c-ccec-4dc6-92a8-8c86bc62a4ec
     m_ActionName: Move/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 406475528}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnAction2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f2efe212-73e4-4e58-92c5-5031f418d2d3
+    m_ActionName: Move/Action2[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Move
   m_DefaultActionMap: Move
@@ -598,6 +616,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!95 &406475535
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406475526}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 353ebcae1ec9441068eea9c83bfa1e6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &450546848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,7 +1202,6 @@ GameObject:
   m_Component:
   - component: {fileID: 940157141}
   - component: {fileID: 940157142}
-  - component: {fileID: 940157143}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -1239,26 +1276,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &940157143
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940157140}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1082693288
 GameObject:
   m_ObjectHideFlags: 0

@@ -106,10 +106,12 @@ public class Mover : MonoBehaviour
     {
         Vector2 moveInput = inputReader.GetMoveInput();
         bool jumpInput = inputReader.GetJumpInput();
+        bool action2Input = inputReader.GetAction2Input();
         velocity = rb.velocity;
         CheckIfGrounded();
         PlatformerMove(moveInput);
         Jump(jumpInput);
+        Attack(action2Input);
         if (velocity.y < downwardVelocityCap)
         {
             velocity.y = downwardVelocityCap;
@@ -176,22 +178,22 @@ public class Mover : MonoBehaviour
         {
             if (velocity.y < 0)
             {
-                Animate("Character_fall");
+                Animate("Fall");
             }
             else
             {
-                Animate("Character_jump");
+                //Animate("Character_jump");
             }
         }
         else
         {
             if (direction.x != 0)
             {
-                Animate("Character_run");
+                //Animate("Character_run");
             }
             else
             {
-                Animate("Character_idle");
+                Animate("PlatformerIdle");
             }
         }
     }
@@ -217,11 +219,20 @@ public class Mover : MonoBehaviour
             alreadyJumped = false;
         }
     }
+    public bool attackFinished = true;
+    private void Attack(bool input)
+    {
+        if (input && attackFinished)
+        {
+            Animate("SpinAttack");
+            attackFinished = false;
+        }
+    }
     void Animate(string newAnimation)
     {
-        if (newAnimation != currentAnimation)
+        if (newAnimation != currentAnimation && attackFinished)
         {
-            //anim.Play(newAnimation);
+            anim.Play(newAnimation);
             currentAnimation = newAnimation;
         }
     }
