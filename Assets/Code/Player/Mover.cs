@@ -41,9 +41,12 @@ public class Mover : MonoBehaviour
     bool walkMaterialChange = false;
     float velocityChange;
     
+
+    float playerScale;
+    
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         GameManager.SetGameMode(0);
     }
     private void Awake()
@@ -66,7 +69,6 @@ public class Mover : MonoBehaviour
 
         spriteScale = sprite.gameObject.GetComponent<Transform>();
     }
-    private float playerScale;
     private void Update()
     {
         if (coyoteTime > 0)
@@ -96,6 +98,7 @@ public class Mover : MonoBehaviour
     }
     private void CafeMode()
     {
+        if (!GameManager.playerIsInControl) return;
         Vector2 moveInput = inputReader.GetMoveInput();
         velocity = rb.velocity;
         CafeMove(moveInput);
@@ -104,6 +107,7 @@ public class Mover : MonoBehaviour
 
     private void PlatformerMode()
     {
+        if (!GameManager.playerIsInControl) return;
         Vector2 moveInput = inputReader.GetMoveInput();
         bool jumpInput = inputReader.GetJumpInput();
         bool action2Input = inputReader.GetAction2Input();

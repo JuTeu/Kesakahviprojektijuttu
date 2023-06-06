@@ -6,21 +6,33 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    // Onko peli mobiililaitteella vai ei. Vaikuttaa esim. käyttöliittymään.
     public static bool isMobile = false;
 
+    public static bool playerIsInControl = true;
+
+    public static bool levelExitPortalFinishedClosing = false;
+    public static bool playerIsReturningFromPortal = false;
+
+    
     // Kahvila = 0, Tasohyppy = 1
     public static int gameMode = 0;
-    public GameObject cafe;
 
-    // Start is called before the first frame update
+    // 0 = Kahvila, -1 = testi kenttä
+    public static int currentLevel = 0;
+
+    public GameObject cafe;
+    public GameObject player;
+    Collider2D[] cafeColliders;
+    LevelManager levelManager;
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         Instance = this;
-        cafe = GameObject.Find("Cafe");
+        levelManager = GetComponent<LevelManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -39,8 +51,43 @@ public class GameManager : MonoBehaviour
         gameMode = mode;
     }
 
+    public static void EnableCafeCollisions(bool toggle)
+    {
+        Instance.cafeColliders = Instance.cafe.GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D col in Instance.cafeColliders)
+        {
+            if (col != null && col.gameObject.name != "Placeholder_Room_1") col.enabled = toggle;
+        }
+    }
+
+    public static void TurnCafeIntoAChildOfThePlayer(bool toggle)
+    {
+        if (toggle)
+        {
+            Instance.cafe.transform.SetParent(Instance.player.transform);
+        }
+        else
+        {
+            Instance.cafe.transform.SetParent(null);
+        }
+    }
     public static void ActivateCafe(bool toggle)
     {
         Instance.cafe.SetActive(toggle);
+    }
+
+    public static void OpenLevel(string levelName)
+    {
+        Instance.levelManager.OpenLevel(levelName);
+    }
+
+    public static void CloseLevel(string levelName)
+    {
+        Instance.levelManager.CloseLevel(levelName);
+    }
+
+    public static bool GetIsLevelLoaded()
+    {
+        return Instance.levelManager.GetIsLevelLoaded();
     }
 }
