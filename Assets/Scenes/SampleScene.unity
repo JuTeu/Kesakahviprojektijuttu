@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 406475533}
   - component: {fileID: 406475534}
   - component: {fileID: 406475535}
+  - component: {fileID: 406475536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -402,13 +403,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxCoyoteTime: 0.12
-  maxJumpBuffer: 0.2
+  maxJumpBuffer: 0.15
   downwardVelocityCap: -12
   extraFallingSpeed: 3
   variableJumpHeight: 1
   playerCafeScalingModifier: 0.1
   sprite: {fileID: 940157142}
   anim: {fileID: 406475535}
+  meleeCollider: {fileID: 0}
   attackFinished: 1
 --- !u!114 &406475528
 MonoBehaviour:
@@ -438,7 +440,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 428a384345dc2ef40936095fdfa84ba9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -637,6 +639,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &406475536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406475526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc79aac88b1dda34594adfde890bd046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 406475529}
+  sprite: {fileID: 940157142}
+  invulnerableToContactDamage: 0
 --- !u!1 &450546848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1262,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932237592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

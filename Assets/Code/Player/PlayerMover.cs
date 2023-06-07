@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mover : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float speed = 4;
     [SerializeField] private float acceleration = 100;
@@ -21,13 +21,16 @@ public class Mover : MonoBehaviour
     [SerializeField] private bool variableJumpHeight = true;
 
     [SerializeField] private float playerCafeScalingModifier = 0.1f;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Collider2D meleeCollider;
+
+
     private float coyoteTime = 0;
     private InputReader inputReader;
     private Rigidbody2D rb;
     private Collider2D col;
-    [SerializeField] private SpriteRenderer sprite;
     private Transform spriteScale;
-    [SerializeField] private Animator anim;
     private string currentAnimation;
     private Transform pos;
     private Vector3 posOffset;
@@ -38,7 +41,6 @@ public class Mover : MonoBehaviour
     private float jumpBuffer = 0;
     private PhysicsMaterial2D standStillMaterial;
     private PhysicsMaterial2D walkMaterial;
-    bool walkMaterialChange = false;
     float velocityChange;
     
 
@@ -46,21 +48,14 @@ public class Mover : MonoBehaviour
     
     void Start()
     {
-        //DontDestroyOnLoad(gameObject);
         GameManager.SetGameMode(0);
     }
     private void Awake()
     {
-        standStillMaterial = new PhysicsMaterial2D();
-        standStillMaterial.friction = 10;
-        walkMaterial = new PhysicsMaterial2D();
-        walkMaterial.friction = 0;
         inputReader = GetComponent<InputReader>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         pos = GetComponent<Transform>();
-        //sprite = GetComponent<SpriteRenderer>();
-        //anim = GetComponent<Animator>();
         velocity = new Vector2();
         posOffset = new Vector3(0.45f, 0f, 0f);
         if (rb == null) {
@@ -68,6 +63,7 @@ public class Mover : MonoBehaviour
         }
 
         spriteScale = sprite.gameObject.GetComponent<Transform>();
+
     }
     private void Update()
     {
@@ -121,16 +117,6 @@ public class Mover : MonoBehaviour
             velocity.y = downwardVelocityCap;
         }
         rb.velocity = velocity;
-        if ((velocity.x > -0.2f && velocity.x < 0.2f))
-        {
-            col.sharedMaterial = standStillMaterial;
-            walkMaterialChange = true;
-        }
-        else if (walkMaterialChange)
-        {
-            col.sharedMaterial = walkMaterial;
-            walkMaterialChange = false;
-        }
     }
     private void CheckIfGrounded()
     {
@@ -232,6 +218,7 @@ public class Mover : MonoBehaviour
             attackFinished = false;
         }
     }
+
     void Animate(string newAnimation)
     {
         if (newAnimation != currentAnimation && attackFinished)
