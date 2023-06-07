@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mover : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float speed = 4;
     [SerializeField] private float acceleration = 100;
@@ -17,17 +17,21 @@ public class Mover : MonoBehaviour
     [SerializeField] private float maxCoyoteTime = 0.2f;
     [SerializeField] private float maxJumpBuffer = 0.2f;
     [SerializeField] private float downwardVelocityCap = -8;
+    [SerializeField] private float upwardVelocityCap = 20;
     [SerializeField] private float extraFallingSpeed = 3;
     [SerializeField] private bool variableJumpHeight = true;
 
     [SerializeField] private float playerCafeScalingModifier = 0.1f;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Collider2D meleeCollider;
+
+
     private float coyoteTime = 0;
     private InputReader inputReader;
     private Rigidbody2D rb;
     private Collider2D col;
-    [SerializeField] private SpriteRenderer sprite;
     private Transform spriteScale;
-    [SerializeField] private Animator anim;
     private string currentAnimation;
     private Transform pos;
     private Vector3 posOffset;
@@ -38,7 +42,6 @@ public class Mover : MonoBehaviour
     private float jumpBuffer = 0;
     private PhysicsMaterial2D standStillMaterial;
     private PhysicsMaterial2D walkMaterial;
-    bool walkMaterialChange = false;
     float velocityChange;
     
 
@@ -46,21 +49,14 @@ public class Mover : MonoBehaviour
     
     void Start()
     {
-        //DontDestroyOnLoad(gameObject);
         GameManager.SetGameMode(0);
     }
     private void Awake()
     {
-        standStillMaterial = new PhysicsMaterial2D();
-        standStillMaterial.friction = 10;
-        walkMaterial = new PhysicsMaterial2D();
-        walkMaterial.friction = 0;
         inputReader = GetComponent<InputReader>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         pos = GetComponent<Transform>();
-        //sprite = GetComponent<SpriteRenderer>();
-        //anim = GetComponent<Animator>();
         velocity = new Vector2();
         posOffset = new Vector3(0.45f, 0f, 0f);
         if (rb == null) {
@@ -68,6 +64,7 @@ public class Mover : MonoBehaviour
         }
 
         spriteScale = sprite.gameObject.GetComponent<Transform>();
+
     }
     private void Update()
     {
@@ -84,11 +81,16 @@ public class Mover : MonoBehaviour
             jumpBuffer = jumpBuffer - Time.deltaTime;
         }
 
+    }
+
+    void LateUpdate()
+    {
         if (GameManager.gameMode == 0)
         {
             playerScale = 1 - spriteScale.position.y * playerCafeScalingModifier;
             spriteScale.localScale = new Vector2(playerScale, playerScale);
             spriteScale.position = new Vector3(spriteScale.position.x, spriteScale.position.y, transform.position.y);
+
         }
     }
     private void FixedUpdate()
@@ -120,17 +122,11 @@ public class Mover : MonoBehaviour
         {
             velocity.y = downwardVelocityCap;
         }
+        else if (velocity.y > upwardVelocityCap)
+        {
+            velocity.y = upwardVelocityCap;
+        }
         rb.velocity = velocity;
-        if ((velocity.x > -0.2f && velocity.x < 0.2f))
-        {
-            col.sharedMaterial = standStillMaterial;
-            walkMaterialChange = true;
-        }
-        else if (walkMaterialChange)
-        {
-            col.sharedMaterial = walkMaterial;
-            walkMaterialChange = false;
-        }
     }
     private void CheckIfGrounded()
     {
@@ -186,14 +182,14 @@ public class Mover : MonoBehaviour
             }
             else
             {
-                //Animate("Character_jump");
+                Animate("PlatformerJump");
             }
         }
         else
         {
             if (direction.x != 0)
             {
-                //Animate("Character_run");
+                Animate("PlatformerRun");
             }
             else
             {
@@ -224,14 +220,22 @@ public class Mover : MonoBehaviour
         }
     }
     public bool attackFinished = true;
+    bool alreadyAttacked = false;
     private void Attack(bool input)
     {
-        if (input && attackFinished)
+        if (input && attackFinished && !alreadyAttacked)
         {
             Animate("SpinAttack");
+            velocity = new Vector2(Mathf.Clamp(velocity.x * 5, -30, 30), velocity.y * 0.6f);
             attackFinished = false;
+            alreadyAttacked = true;
+        }
+        else if (!input && alreadyAttacked)
+        {
+            alreadyAttacked = false;
         }
     }
+
     void Animate(string newAnimation)
     {
         if (newAnimation != currentAnimation && attackFinished)

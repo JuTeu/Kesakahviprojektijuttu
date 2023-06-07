@@ -5,16 +5,25 @@ using UnityEngine;
 public class TestLevelExit : MonoBehaviour
 {
     bool portalClosingFinished = false;
+    PlayerHealth playerHealth;
+    GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
         portalClosingFinished = GameManager.levelExitPortalFinishedClosing;
+
+        if (playerHealth.GetHealth() <= 0 || player.transform.position.y < -10)
+        {
+            player.transform.position = Vector2.zero;
+            playerHealth.Heal(10);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
