@@ -17,6 +17,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float maxCoyoteTime = 0.2f;
     [SerializeField] private float maxJumpBuffer = 0.2f;
     [SerializeField] private float downwardVelocityCap = -8;
+    [SerializeField] private float upwardVelocityCap = 20;
     [SerializeField] private float extraFallingSpeed = 3;
     [SerializeField] private bool variableJumpHeight = true;
 
@@ -116,6 +117,10 @@ public class PlayerMover : MonoBehaviour
         {
             velocity.y = downwardVelocityCap;
         }
+        else if (velocity.y > upwardVelocityCap)
+        {
+            velocity.y = upwardVelocityCap;
+        }
         rb.velocity = velocity;
     }
     private void CheckIfGrounded()
@@ -172,14 +177,14 @@ public class PlayerMover : MonoBehaviour
             }
             else
             {
-                //Animate("Character_jump");
+                Animate("PlatformerJump");
             }
         }
         else
         {
             if (direction.x != 0)
             {
-                //Animate("Character_run");
+                Animate("PlatformerRun");
             }
             else
             {
@@ -210,12 +215,20 @@ public class PlayerMover : MonoBehaviour
         }
     }
     public bool attackFinished = true;
+    bool alreadyAttacked = false;
     private void Attack(bool input)
     {
-        if (input && attackFinished)
+        if (input && attackFinished && !alreadyAttacked)
         {
             Animate("SpinAttack");
+            velocity = new Vector2(Mathf.Clamp(velocity.x * 5, -30, 30), velocity.y * 0.6f);
+            Debug.Log(velocity);
             attackFinished = false;
+            alreadyAttacked = true;
+        }
+        else if (!input && alreadyAttacked)
+        {
+            alreadyAttacked = false;
         }
     }
 

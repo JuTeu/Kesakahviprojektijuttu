@@ -90,7 +90,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Keyboard",
+                    "name": "WASD",
                     "id": "dec56793-7653-4761-86f3-ab6ec2a4ed18",
                     "path": "2DVector",
                     "interactions": "",
@@ -145,6 +145,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Arrows",
+                    "id": "8a36cc8a-98f0-4025-9cd3-a0cb08c30e85",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "59522304-4e76-49e6-a4ef-626878070520",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "afb872c1-5b3d-4d84-a4bb-a0c93932356c",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "568d8d7e-2345-4d67-8299-d54e75b9f3ea",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "3c5c4de7-6f62-45a1-8ad3-d68191ab8935",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "b8228a22-2e82-4607-b3eb-958b6f9f19db",
                     "path": "<Gamepad>/buttonSouth",
@@ -179,6 +234,17 @@
                 },
                 {
                     "name": "",
+                    "id": "5423b6d1-72bd-4c12-a22c-9734afd5e9fd",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "26d2acec-e899-4362-b617-f3574a497ddb",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -192,6 +258,17 @@
                     "name": "",
                     "id": "eb6d4ea4-5df1-406e-b192-bdfad0a6d6be",
                     "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e4b154c-5414-410a-a4ca-c1bb365193c3",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

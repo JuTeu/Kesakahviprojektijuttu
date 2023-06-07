@@ -405,6 +405,7 @@ MonoBehaviour:
   maxCoyoteTime: 0.12
   maxJumpBuffer: 0.15
   downwardVelocityCap: -12
+  upwardVelocityCap: 15
   extraFallingSpeed: 3
   variableJumpHeight: 1
   playerCafeScalingModifier: 0.1

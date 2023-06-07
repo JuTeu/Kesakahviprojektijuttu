@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (iFrames > 0f) { 
             iFrames -= Time.deltaTime;
-            sprite.color = new Color(1f, 1f, 1f, Mathf.Sin(32 * iFrames) / 2 + 0.5f);
+            sprite.color = new Color(1f, 0.4f, 0.4f, Mathf.Sin(32 * iFrames) / 2 + 0.5f);
             if (iFrames < 0.1f) sprite.color = Color.white;
         }
     }
