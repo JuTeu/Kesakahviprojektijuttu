@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TestLevelExit : MonoBehaviour
+{
+    bool portalClosingFinished = false;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        portalClosingFinished = GameManager.levelExitPortalFinishedClosing;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            StartCoroutine(ExitLevel());
+        }
+    }
+
+   IEnumerator ExitLevel()
+    {
+        GameManager.playerIsInControl = false;
+        GameManager.playerIsReturningFromPortal = true;
+        GameManager.ActivateCafe(true);
+        Rigidbody2D playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        playerRb.gravityScale = 0;
+        playerRb.velocity = Vector2.zero;
+        GameObject.FindWithTag("Portal").GetComponent<Animator>().Play("PortalExitLevel");
+        yield return new WaitUntil(() => portalClosingFinished);
+        GameObject camera = Camera.main.gameObject;
+        camera.transform.SetParent(playerRb.transform);
+        playerRb.position = Vector2.zero; // Pelaajan sijainti takaisin alkuun
+        yield return new WaitForSecondsRealtime(0.1f); // Lapset ei tule muuten mukana
+        camera.transform.SetParent(null);
+        GameManager.TurnCafeIntoAChildOfThePlayer(false);
+        GameManager.CloseLevel("PlatformerTestLevel");
+        GameManager.EnableCafeCollisions(true);
+        GameManager.SetGameMode(0);
+        GameManager.playerIsInControl = true;
+    }
+}

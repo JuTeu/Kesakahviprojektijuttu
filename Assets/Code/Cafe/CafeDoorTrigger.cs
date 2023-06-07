@@ -26,7 +26,7 @@ public class CafeDoorTrigger : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            playerIsInStorageRoom = collision.gameObject.transform.position.y > 0.01f;
+            playerIsInStorageRoom = collision.gameObject.transform.position.y > transform.position.y;
         }
     }
 
@@ -67,6 +67,7 @@ public class CafeDoorTrigger : MonoBehaviour
 
     void CameraMovement()
     {
+        if (GameManager.gameMode != 0) return;
         currentPos = cam.position;
         currentPos = Vector2.MoveTowards(currentPos, targetPos, 5 * Time.deltaTime);
         cam.position = new Vector3(currentPos.x, currentPos.y, -10);
