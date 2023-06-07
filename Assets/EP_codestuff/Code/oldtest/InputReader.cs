@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace EcoExplorer
-{
+
 	public class InputReader : MonoBehaviour
 	{
 		private Rigidbody2D rb2D;
@@ -81,4 +80,3 @@ namespace EcoExplorer
 			return isJumping;
 		}
 	}
-}
