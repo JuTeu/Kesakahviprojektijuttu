@@ -654,6 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 406475529}
   sprite: {fileID: 940157142}
+  maxHealth: 10
   invulnerableToContactDamage: 0
 --- !u!1 &450546848
 GameObject:

@@ -81,11 +81,16 @@ public class PlayerMover : MonoBehaviour
             jumpBuffer = jumpBuffer - Time.deltaTime;
         }
 
+    }
+
+    void LateUpdate()
+    {
         if (GameManager.gameMode == 0)
         {
             playerScale = 1 - spriteScale.position.y * playerCafeScalingModifier;
             spriteScale.localScale = new Vector2(playerScale, playerScale);
             spriteScale.position = new Vector3(spriteScale.position.x, spriteScale.position.y, transform.position.y);
+
         }
     }
     private void FixedUpdate()
@@ -222,7 +227,6 @@ public class PlayerMover : MonoBehaviour
         {
             Animate("SpinAttack");
             velocity = new Vector2(Mathf.Clamp(velocity.x * 5, -30, 30), velocity.y * 0.6f);
-            Debug.Log(velocity);
             attackFinished = false;
             alreadyAttacked = true;
         }

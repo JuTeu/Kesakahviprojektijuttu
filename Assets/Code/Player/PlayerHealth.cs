@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer sprite;
+    [SerializeField] int maxHealth = 10;
     int health = 10;
     float iFrames = 0;
     public bool invulnerableToContactDamage = false;
@@ -13,6 +14,14 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
 
+    }
+
+    public int GetHealth() {return health;}
+
+    public void Heal(int healthAmount)
+    {
+        health += healthAmount;
+        if (health > maxHealth) health = maxHealth;
     }
 
     // Vahinko tyypit: 0 = kontaktivahinko, 1 = ???, ...
