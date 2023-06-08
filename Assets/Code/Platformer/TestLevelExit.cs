@@ -5,13 +5,13 @@ using UnityEngine;
 public class TestLevelExit : MonoBehaviour
 {
     bool portalClosingFinished = false;
-    PlayerHealth playerHealth;
+    Health playerHealth;
     GameObject player;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth = player.GetComponent<Health>();
     }
 
     // Update is called once per frame

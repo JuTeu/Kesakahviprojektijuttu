@@ -8,6 +8,7 @@ public class InputReader : MonoBehaviour
     private Vector2 moveInput;
     private bool jumpInput;
     private bool action2;
+    private bool action3;
    
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -35,7 +36,19 @@ public class InputReader : MonoBehaviour
             action2 = false;
         }
     }
+    public void OnAction3(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            action3 = true;
+        }
+        if (context.canceled)
+        {
+            action3 = false;
+        }
+    }
     public Vector2 GetMoveInput() { return moveInput; }
     public bool GetJumpInput() { return jumpInput; }
     public bool GetAction2Input() { return action2; }
+    public bool GetAction3Input() { return action3; }
 }

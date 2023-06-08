@@ -31,6 +31,7 @@ public class PlayerMover : MonoBehaviour
     private InputReader inputReader;
     private Rigidbody2D rb;
     private Collider2D col;
+    private PlayerMagic magic;
     private Transform spriteScale;
     private string currentAnimation;
     private Transform pos;
@@ -57,6 +58,7 @@ public class PlayerMover : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         pos = GetComponent<Transform>();
+        magic = GetComponent<PlayerMagic>();
         velocity = new Vector2();
         posOffset = new Vector3(0.45f, 0f, 0f);
         if (rb == null) {
@@ -113,11 +115,13 @@ public class PlayerMover : MonoBehaviour
         Vector2 moveInput = inputReader.GetMoveInput();
         bool jumpInput = inputReader.GetJumpInput();
         bool action2Input = inputReader.GetAction2Input();
+        bool action3Input = inputReader.GetAction3Input();
         velocity = rb.velocity;
         CheckIfGrounded();
         PlatformerMove(moveInput);
         Jump(jumpInput);
-        Attack(action2Input);
+        Attack(action2Input, moveInput);
+        Magic(action3Input, moveInput);
         if (velocity.y < downwardVelocityCap)
         {
             velocity.y = downwardVelocityCap;
@@ -221,12 +225,13 @@ public class PlayerMover : MonoBehaviour
     }
     public bool attackFinished = true;
     bool alreadyAttacked = false;
-    private void Attack(bool input)
+    private void Attack(bool input, Vector2 moveInput)
     {
         if (input && attackFinished && !alreadyAttacked)
         {
             Animate("SpinAttack");
-            velocity = new Vector2(Mathf.Clamp(velocity.x * 5, -30, 30), velocity.y * 0.6f);
+            Vector2 speedBoost = new Vector2(new Vector2(moveInput.x, 0).normalized.x * 30, velocity.y * 0.6f);
+            velocity = speedBoost;
             attackFinished = false;
             alreadyAttacked = true;
         }
@@ -234,6 +239,10 @@ public class PlayerMover : MonoBehaviour
         {
             alreadyAttacked = false;
         }
+    }
+    private void Magic(bool input, Vector2 moveInput)
+    {
+        magic.CastMagic(input, moveInput);
     }
 
     void Animate(string newAnimation)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] bool isPlayerAligned = false;

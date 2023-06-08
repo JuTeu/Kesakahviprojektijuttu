@@ -20,7 +20,7 @@ public class DamageTest : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().Damage(20, 20, transform.position, 1, 0.1f);
+            collision.gameObject.GetComponent<Health>().Damage(20, 20, transform.position, 1, 0.1f);
         }
     }
 }

@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 406475534}
   - component: {fileID: 406475535}
   - component: {fileID: 406475536}
+  - component: {fileID: 406475537}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -589,6 +590,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f2efe212-73e4-4e58-92c5-5031f418d2d3
     m_ActionName: Move/Action2[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 406475528}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnAction3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2991e999-2a36-4dc8-bdc5-4ddb92181f5c
+    m_ActionName: Move/Action3[/Gamepad/buttonEast,/Keyboard/i,/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Move
   m_DefaultActionMap: Move
@@ -652,10 +669,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc79aac88b1dda34594adfde890bd046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 406475529}
+  isPlayerAligned: 1
   sprite: {fileID: 940157142}
   maxHealth: 10
+  knockbackResistance: 0
   invulnerableToContactDamage: 0
+--- !u!114 &406475537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406475526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7632521223a583d7db1c23d8099f8cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 940157142}
+  fireSpell: {fileID: 6412904241084360248, guid: 928b1511a0d77cefc8229d324880d7dd, type: 3}
 --- !u!1 &450546848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940157141}
   - component: {fileID: 940157142}
+  - component: {fileID: 940157143}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -1367,6 +1400,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &940157143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940157140}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c26dde4e5c717118dc4e265eda2920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 0.1
+  lifeTime: 0.5
+  initialColor: {r: 1, g: 0.6099541, b: 0.2971698, a: 1}
+  finalColor: {r: 1, g: 0.6117647, b: 0.29803923, a: 0}
 --- !u!1 &1082693288
 GameObject:
   m_ObjectHideFlags: 0
