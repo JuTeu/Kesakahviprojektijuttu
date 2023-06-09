@@ -6,6 +6,8 @@ public class PlayerBounce : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float launchForce; 
+
+    // addforce
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
