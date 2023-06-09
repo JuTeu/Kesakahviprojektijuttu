@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlatformerTestLevel.unity
     guid: 06ba73763601b5149bc3e9b9adffa6b1
+  - enabled: 1
+    path: Assets/Scenes/saimiTestScene.unity
+    guid: 5a934dd4d281cd74db68fcace1ca0f79
   m_configObjects: {}

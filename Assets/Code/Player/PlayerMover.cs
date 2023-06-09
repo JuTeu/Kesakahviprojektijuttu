@@ -27,7 +27,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private Collider2D meleeCollider;
 
 
-    private float coyoteTime = 0;
+    private float coyoteTime = 0, timeSinceJump = 0, jumpBuffer = 0, velocityChange, playerScale;
     private InputReader inputReader;
     private Rigidbody2D rb;
     private Collider2D col;
@@ -37,16 +37,9 @@ public class PlayerMover : MonoBehaviour
     private Transform pos;
     private Vector3 posOffset;
     private Vector2 velocity;
-    private bool onGround = false;
-    private bool alreadyJumped = false;
-    private float timeSinceJump = 0;
-    private float jumpBuffer = 0;
-    private PhysicsMaterial2D standStillMaterial;
-    private PhysicsMaterial2D walkMaterial;
-    float velocityChange;
+    private bool onGround = false, alreadyJumped = false;
     
-
-    float playerScale;
+    public bool interacting = false;
     
     void Start()
     {
@@ -106,6 +99,7 @@ public class PlayerMover : MonoBehaviour
         Vector2 moveInput = inputReader.GetMoveInput();
         velocity = rb.velocity;
         CafeMove(moveInput);
+        interacting = inputReader.GetJumpInput();
         rb.velocity = velocity;
     }
 
