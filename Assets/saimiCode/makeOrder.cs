@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System;
 
 public class makeOrder : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class makeOrder : MonoBehaviour
     public GameObject chooseOrder;
     public GameObject chooseBean;
     public GameObject chooseMilk;
+    public GameObject orderList;
+    private GameObject currentOrder;
+    private GameObject order;
+    private GameObject orderScreen;
+    private int orderIndex;
+    private bool isAnyOrderActive;
+    orderSender orderSenderScript;
     private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
     private string playerRecipe = "";
     private string selectedOrder = "";
@@ -17,7 +25,14 @@ public class makeOrder : MonoBehaviour
 
     //TODO: 1: Add a back button to stop making an order and go back
     //2: add counter for money
-
+    void Awake()
+    {
+        order = GameObject.Find("onderSenderScriptHolder");
+        orderSenderScript = order.GetComponent<orderSender>();
+        isAnyOrderActive = false;
+        orderScreen = GameObject.Find("gridContent");
+        orderSenderScript.activeOrder = false;
+    }
     private void Start() //hide ingredients bcs no order is selected yet
     {
         chooseOrder.SetActive(true);
@@ -25,9 +40,19 @@ public class makeOrder : MonoBehaviour
         chooseBean.SetActive(false);
         chooseMilk.SetActive(false);
     }
+    private void FixedUpdate()
+    {
+        if (orderSenderScript.isOrderActive() && selectedOrder == "" && !isAnyOrderActive)
+        {
+            acceptOrder();
+            isAnyOrderActive = true;
+            Debug.Log("order accepted");
+            orderIndex = orderSenderScript.orderOrder();
+        }
+    }
     public void acceptOrder() //Adding more orders here later with more drinks. Maybe switch case is better used later.
     {
-        if (this.gameObject.name == "OrderLatte")
+        if (orderSenderScript.sentOrder() == "OrderLatte")
         {
             makeLatte();
         }
@@ -49,7 +74,7 @@ public class makeOrder : MonoBehaviour
         {
             playerRecipe = string.Concat(playerRecipe, 'L');
         }
-        else if (btn.name =="normalCup")
+        else if (btn.name == "normalCup")
         {
             playerRecipe = string.Concat(playerRecipe, 'N');;
         }
@@ -62,6 +87,9 @@ public class makeOrder : MonoBehaviour
                 chooseCup.SetActive(false);
                 chooseOrder.SetActive(true);
                 playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
             }
             else
             {
@@ -91,6 +119,9 @@ public class makeOrder : MonoBehaviour
                 chooseBean.SetActive(false);
                 chooseOrder.SetActive(true);
                 playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
             }
             else
             {
@@ -116,6 +147,9 @@ public class makeOrder : MonoBehaviour
                 chooseMilk.SetActive(false);
                 chooseOrder.SetActive(true);
                 playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
             }
             else
             {
@@ -123,7 +157,10 @@ public class makeOrder : MonoBehaviour
                 chooseMilk.SetActive(false);
                 chooseOrder.SetActive(true);
                 playerRecipe = "";
-                Destroy(this.gameObject);
+                Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
+                isAnyOrderActive = false;
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
             }
             break;
         }
