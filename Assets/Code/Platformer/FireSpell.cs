@@ -18,7 +18,7 @@ public class FireSpell : MonoBehaviour
             {
                 GameObject newProjectile;
                 newProjectile = Instantiate(projectile, pentagram.position, Quaternion.identity);
-                newProjectile.GetComponent<Fireball>().Shoot(0.1f, facing);
+                newProjectile.GetComponent<Fireball>().Shoot(0.1f, facing ? 0 : 180);
                 yield return new WaitForSeconds(0.1f);
             }
         }

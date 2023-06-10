@@ -204,7 +204,7 @@ MonoBehaviour:
   - {fileID: 6412904240778218978}
   - {fileID: 6412904241439110929}
   - {fileID: 6412904241572674717}
-  projectile: {fileID: 6828923316779312842, guid: 204782de549ad107d9de8d77da2b2df1, type: 3}
+  projectile: {fileID: 6585837833880305331, guid: adee2d6b474518c1fb55adeea3693dfe, type: 3}
 --- !u!1 &6412904241279638439
 GameObject:
   m_ObjectHideFlags: 0

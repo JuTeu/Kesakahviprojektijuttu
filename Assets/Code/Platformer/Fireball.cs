@@ -5,17 +5,20 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     bool fly = false;
-    bool dir;
-    // Start is called before the first frame update
+    bool exploded = false;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] ParticleSystem fireBase, fireGlow;
+    [SerializeField] GameObject ball, fireExplosion;
+    
     void Start()
     {
-        
+
     }
 
-    public void Shoot(float delay, bool direction)
+    public void Shoot(float delay, float rotation)
     {
+        rb.rotation = rotation;
         StartCoroutine(IEShoot(delay));
-        dir = direction;
     }
 
     IEnumerator IEShoot(float delay)
@@ -24,19 +27,34 @@ public class Fireball : MonoBehaviour
         fly = true;
 
         yield return new WaitForSeconds(2);
-        Destroy(gameObject);
+        StartCoroutine(Explode());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (fly && dir)
+        if (fly && !exploded) rb.AddForce(transform.right * 10);
+        else if (exploded) rb.velocity = Vector2.zero;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
         {
-            transform.position = new Vector2(transform.position.x + Time.deltaTime * 10, transform.position.y);
+            //collision.gameObject.GetComponent<Health>().Damage(5, 20, transform.position, 1, 0.1f);
         }
-        else if (fly)
+        else if (collision.gameObject.layer == 6 && !exploded) // Layer 6 on maa, eli tuhoa kun osuu maahan
         {
-            transform.position = new Vector2(transform.position.x - Time.deltaTime * 10, transform.position.y);
+            StartCoroutine(Explode());
         }
+    }
+    IEnumerator Explode()
+    {
+        exploded = true;
+        fireBase.Stop();
+        fireGlow.Stop();
+        ball.SetActive(false);
+        fireExplosion.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 }

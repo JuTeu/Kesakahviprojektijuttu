@@ -36,12 +36,12 @@ public class PlayerMagic : MonoBehaviour
         //rb.constraints = RigidbodyConstraints2D.FreezeAll;
         if (sprite.flipX)
         {
-            spellPosition = new Vector2(transform.position.x + 2, transform.position.y + 2);
+            spellPosition = new Vector2(transform.position.x + 2, transform.position.y + 2.5f);
             spellRotation.eulerAngles = new Vector3(0, -40, 0); 
         }
         else
         {
-            spellPosition = new Vector2(transform.position.x - 2, transform.position.y + 2);
+            spellPosition = new Vector2(transform.position.x - 2, transform.position.y + 2.5f);
             spellRotation.eulerAngles = new Vector3(0, 40, 0);
         }
         Instantiate(fireSpell, spellPosition, spellRotation);
