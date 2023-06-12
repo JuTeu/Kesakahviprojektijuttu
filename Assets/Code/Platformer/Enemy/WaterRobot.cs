@@ -12,7 +12,6 @@ public class WaterRobot : MonoBehaviour
 
     void Start()
     {
-        handsAnim.Play("Attack");
         patrolTarget = patrol1;
     }
 
