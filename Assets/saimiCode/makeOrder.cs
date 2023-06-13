@@ -11,6 +11,8 @@ public class makeOrder : MonoBehaviour
     public GameObject chooseOrder;
     public GameObject chooseBean;
     public GameObject chooseMilk;
+    public GameObject chooseTopping1;
+    public GameObject chooseTopping2;
     public GameObject orderList;
     private GameObject currentOrder;
     private GameObject order;
@@ -19,6 +21,8 @@ public class makeOrder : MonoBehaviour
     private bool isAnyOrderActive;
     orderSender orderSenderScript;
     private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
+    private string espressoRecipe = "E1";
+    private string catfrappeRecipe = "C2MWCCS";
     private string playerRecipe = "";
     private string selectedOrder = "";
 
@@ -39,6 +43,8 @@ public class makeOrder : MonoBehaviour
         chooseCup.SetActive(false);
         chooseBean.SetActive(false);
         chooseMilk.SetActive(false);
+        chooseTopping1.SetActive(false);
+        chooseTopping2.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -52,19 +58,23 @@ public class makeOrder : MonoBehaviour
     }
     public void acceptOrder() //Adding more orders here later with more drinks. Maybe switch case is better used later.
     {
-        if (orderSenderScript.sentOrder() == "OrderLatte")
-        {
-            makeLatte();
-        }
-    }
-
-    private void makeLatte() // defines what order is being made
-    {
         chooseOrder.SetActive(false);
         chooseCup.SetActive(true);
-        selectedOrder = "Latte";
-    }
+        switch(orderSenderScript.sentOrder())
+        {
+            case "OrderLatte":
+            selectedOrder = "Latte";
+            break;
+            
+            case "OrderEspresso":
+            selectedOrder = "Espresso";
+            break;
 
+            case "OrderCatfrappe":
+            selectedOrder = "Catfrappe";
+            break;
+        }
+    }
 
     // all of these functions check what ingredient is selected, compares that recipe to the recipe (string) what the user is building.
     // if at any point the recipe is wrong, it resets the users recipe (string) and goes back to choose order
@@ -74,9 +84,13 @@ public class makeOrder : MonoBehaviour
         {
             playerRecipe = string.Concat(playerRecipe, 'L');
         }
-        else if (btn.name == "normalCup")
+        else if (btn.name == "espressoCup")
         {
-            playerRecipe = string.Concat(playerRecipe, 'N');;
+            playerRecipe = string.Concat(playerRecipe, 'E');
+        }
+        else if (btn.name == "catfrappeCup")
+        {
+            playerRecipe = string.Concat(playerRecipe, 'C');
         }
         switch (selectedOrder)
         {
@@ -94,6 +108,42 @@ public class makeOrder : MonoBehaviour
             else
             {
                 Debug.Log("Latte cup chosen");
+                chooseCup.SetActive(false);
+                chooseBean.SetActive(true);
+            }
+            break;
+            case "Espresso":
+            if (compareRecipes(espressoRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong cup! try again");
+                chooseCup.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Espresso cup chosen");
+                chooseCup.SetActive(false);
+                chooseBean.SetActive(true);
+            }
+            break;
+            case "Catfrappe":
+            if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong cup! try again");
+                chooseCup.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Catfrappe cup chosen");
                 chooseCup.SetActive(false);
                 chooseBean.SetActive(true);
             }
@@ -130,13 +180,56 @@ public class makeOrder : MonoBehaviour
                 chooseMilk.SetActive(true);
             }
             break;
+
+            case "Espresso":
+            if (compareRecipes(espressoRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong bean! try again");
+                chooseBean.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Good job! You completed the order and earned 15 coins!");
+                chooseBean.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
+                isAnyOrderActive = false;
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+            }
+            break;
+
+            case "Catfrappe":
+            if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong bean! try again");
+                chooseBean.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Correct bean chosen");
+                chooseBean.SetActive(false);
+                chooseMilk.SetActive(true);
+            }
+            break;
         }
     }
     public void chooseCorrectMilk(Button btn)
     {
         if (btn.name == "normalMilk")
         {
-            playerRecipe = string.Concat(playerRecipe, 'M');;
+            playerRecipe = string.Concat(playerRecipe, 'M');
         }
         switch (selectedOrder)
         {
@@ -155,6 +248,87 @@ public class makeOrder : MonoBehaviour
             {
                 Debug.Log("Good job! you completed the order and earned 20 coins!");
                 chooseMilk.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
+                isAnyOrderActive = false;
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+            }
+            break;
+
+            case "Catfrappe":
+            if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong milk! try again");
+                chooseMilk.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Correct milk chosen");
+                chooseMilk.SetActive(false);
+                chooseTopping1.SetActive(true);
+            }
+            break;
+        }
+    }
+
+    public void chooseCorrectTopping1(Button btn)
+    {
+        if (btn.name == "whippedCream")
+        {
+            playerRecipe = string.Concat(playerRecipe, "WC");
+        }
+        switch (selectedOrder)
+        {
+            case "Catfrappe":
+            if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong Topping! try again");
+                chooseTopping1.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Correct Topping chosen");
+                chooseTopping1.SetActive(false);
+                chooseTopping2.SetActive(true);
+            }
+            break;
+        }
+    }
+    public void chooseCorrectTopping2(Button btn)
+    {
+        if (btn.name == "chocolateSauce")
+        {
+            playerRecipe = string.Concat(playerRecipe, "CS");
+        }
+        switch (selectedOrder)
+        {
+            case "Catfrappe":
+            if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
+            {
+                Debug.Log("Wrong Topping! try again");
+                chooseTopping2.SetActive(false);
+                chooseOrder.SetActive(true);
+                playerRecipe = "";
+                selectedOrder = "";
+                orderSenderScript.activeOrder = false;
+                isAnyOrderActive = false;
+            }
+            else
+            {
+                Debug.Log("Good job! you completed the order and earned 30 coins!");
+                chooseTopping2.SetActive(false);
                 chooseOrder.SetActive(true);
                 playerRecipe = "";
                 Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
