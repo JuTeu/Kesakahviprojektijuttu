@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlayerHealth : MonoBehaviour
+public class Health : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] bool isPlayerAligned = false;
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] SpriteRenderer[] sprites;
     [SerializeField] int maxHealth = 10;
-    int health = 10;
+    [SerializeField] UnityEvent die;
+    int health;
     float iFrames = 0;
     public float knockbackResistance = 0;
     public bool invulnerableToContactDamage = false;
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-        if (sprite == null) sprite = GetComponent<SpriteRenderer>();
+        if (sprites == null) sprites = new SpriteRenderer[] { GetComponent<SpriteRenderer>() };
     }
 
     public bool GetIsPlayerAligned() {return isPlayerAligned;}
@@ -39,7 +42,8 @@ public class PlayerHealth : MonoBehaviour
         Vector2 knockbackForceVector = knockbackDirection.normalized * knockbackForce;
         knockbackForceVector = new Vector2(knockbackForceVector.x, knockbackForceVector.y * 3);
         health -= damage;
-        if (health > 0) rb.AddForce(knockbackForceVector * (1 - knockbackResistance / 100), ForceMode2D.Impulse);
+        if (health > 0 && rb != null) rb.AddForce(knockbackForceVector * (1 - knockbackResistance / 100), ForceMode2D.Impulse);
+        else if (health <= 0) die.Invoke();
         Debug.Log(gameObject.name + ":n Elämä: " + health);
     }
 
@@ -48,8 +52,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if (iFrames > 0f) { 
             iFrames -= Time.deltaTime;
-            sprite.color = new Color(1f, 0.4f, 0.4f, Mathf.Sin(32 * iFrames) / 2 + 0.5f);
-            if (iFrames < 0.1f) sprite.color = Color.white;
+            foreach (SpriteRenderer sprite in sprites)
+            {
+                sprite.color = new Color(1f, 0.4f, 0.4f, Mathf.Sin(32 * iFrames) / 2 + 0.5f);
+                if (iFrames < 0.1f) sprite.color = Color.white;
+            }
         }
     }
 

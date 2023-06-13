@@ -336,6 +336,7 @@ MonoBehaviour:
   sprite: {fileID: 6621195893314027921}
   anim: {fileID: 6621195893854042696}
   meleeCollider: {fileID: 0}
+  interacting: 0
   attackFinished: 1
 --- !u!114 &6621195893854042698
 MonoBehaviour:
@@ -490,7 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerAligned: 1
-  sprite: {fileID: 6621195893314027921}
+  sprites:
+  - {fileID: 6621195893314027921}
   maxHealth: 10
   knockbackResistance: 0
   invulnerableToContactDamage: 0

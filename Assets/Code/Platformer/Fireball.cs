@@ -6,9 +6,11 @@ public class Fireball : MonoBehaviour
 {
     bool fly = false;
     bool exploded = false;
+    Health health;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] ParticleSystem fireBase, fireGlow;
     [SerializeField] GameObject ball, fireExplosion;
+    public bool isPlayerAligned = true;
     
     void Start()
     {
@@ -38,9 +40,14 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        health = collision.gameObject.GetComponent<Health>();
+        if (health != null)
         {
-            //collision.gameObject.GetComponent<Health>().Damage(5, 20, transform.position, 1, 0.1f);
+            if (health.GetIsPlayerAligned() != isPlayerAligned)
+            {
+                health.Damage(5, 20, transform.position, 1, 0.4f);
+                StartCoroutine(Explode());
+            }
         }
         else if (collision.gameObject.layer == 6 && !exploded) // Layer 6 on maa, eli tuhoa kun osuu maahan
         {

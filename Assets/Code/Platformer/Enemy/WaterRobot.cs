@@ -8,7 +8,7 @@ public class WaterRobot : MonoBehaviour
     [SerializeField] Vector2 patrol1, patrol2;
     Transform playerTransform;
     Vector2 patrolTarget;
-    bool playerIsNear = false;
+    bool playerIsNear = false, isAlive = true;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class WaterRobot : MonoBehaviour
 
     void Update()
     {
-
+        if (!isAlive) return;
         if (playerIsNear)
         {
             if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingLeft") && playerTransform.position.x > transform.position.x) bodyAnim.Play("TurnToRight");
@@ -58,5 +58,13 @@ public class WaterRobot : MonoBehaviour
         {
             handsAnim.Play("Attack");
         }
+    }
+
+    public void Die()
+    {
+        isAlive = false;
+        handsAnim.Play("Die");
+        mainAnim.Play("Die");
+        Debug.Log("AU");
     }
 }
