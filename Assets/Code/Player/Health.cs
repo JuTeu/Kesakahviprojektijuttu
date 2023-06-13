@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     [SerializeField] int maxHealth = 10;
     [SerializeField] UnityEvent die;
     int health;
-    float iFrames = 0;
+    float iFrames = 0, flashFrames = 0;
     public float knockbackResistance = 0;
     public bool invulnerableToContactDamage = false;
     // Start is called before the first frame update
@@ -42,6 +42,7 @@ public class Health : MonoBehaviour
         Vector2 knockbackForceVector = knockbackDirection.normalized * knockbackForce;
         knockbackForceVector = new Vector2(knockbackForceVector.x, knockbackForceVector.y * 3);
         health -= damage;
+        if (!isPlayerAligned) flashFrames = 0.5f;
         if (health > 0 && rb != null) rb.AddForce(knockbackForceVector * (1 - knockbackResistance / 100), ForceMode2D.Impulse);
         else if (health <= 0) die.Invoke();
         Debug.Log(gameObject.name + ":n Elämä: " + health);
@@ -50,7 +51,8 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (iFrames > 0f) { 
+        if (isPlayerAligned && iFrames > 0f)
+        { 
             iFrames -= Time.deltaTime;
             foreach (SpriteRenderer sprite in sprites)
             {
@@ -58,6 +60,17 @@ public class Health : MonoBehaviour
                 if (iFrames < 0.1f) sprite.color = Color.white;
             }
         }
+        else if (flashFrames > 0f)
+        {
+            flashFrames -= Time.deltaTime;
+            iFrames -= Time.deltaTime;
+            foreach (SpriteRenderer sprite in sprites)
+            {
+                sprite.color = new Color(1f, 0.4f, 0.4f, Mathf.Sin(32 * iFrames) / 2 + 0.5f);
+                if (flashFrames < 0.1f) sprite.color = Color.white;
+            }
+        }
+
     }
 
 

@@ -45,7 +45,7 @@ public class Fireball : MonoBehaviour
         {
             if (health.GetIsPlayerAligned() != isPlayerAligned)
             {
-                health.Damage(5, 20, transform.position, 1, 0.4f);
+                health.Damage(5, 20, transform.position, 1, 0.1f);
                 StartCoroutine(Explode());
             }
         }

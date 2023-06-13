@@ -65,6 +65,5 @@ public class WaterRobot : MonoBehaviour
         isAlive = false;
         handsAnim.Play("Die");
         mainAnim.Play("Die");
-        Debug.Log("AU");
     }
 }
