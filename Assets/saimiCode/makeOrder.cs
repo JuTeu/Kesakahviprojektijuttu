@@ -7,6 +7,7 @@ using System;
 
 public class makeOrder : MonoBehaviour
 {
+    public static makeOrder Instance;
     public GameObject chooseCup;
     public GameObject chooseOrder;
     public GameObject chooseBean;
