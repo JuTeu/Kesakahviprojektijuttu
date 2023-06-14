@@ -18,6 +18,7 @@ public class makeOrder : MonoBehaviour
     private GameObject order;
     private GameObject orderScreen;
     private int orderIndex;
+    private int orderPayout;
     private bool isAnyOrderActive;
     orderSender orderSenderScript;
     private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
@@ -64,14 +65,17 @@ public class makeOrder : MonoBehaviour
         {
             case "OrderLatte":
             selectedOrder = "Latte";
+            orderPayout = 20;
             break;
             
             case "OrderEspresso":
             selectedOrder = "Espresso";
+            orderPayout = 15;
             break;
 
             case "OrderCatfrappe":
             selectedOrder = "Catfrappe";
+            orderPayout = 30;
             break;
         }
     }
@@ -97,13 +101,7 @@ public class makeOrder : MonoBehaviour
             case "Latte":
             if (compareRecipes(latteRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong cup! try again");
-                chooseCup.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -115,13 +113,7 @@ public class makeOrder : MonoBehaviour
             case "Espresso":
             if (compareRecipes(espressoRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong cup! try again");
-                chooseCup.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -133,13 +125,7 @@ public class makeOrder : MonoBehaviour
             case "Catfrappe":
             if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong cup! try again");
-                chooseCup.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -165,13 +151,7 @@ public class makeOrder : MonoBehaviour
             case "Latte":
             if (compareRecipes(latteRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong bean! try again");
-                chooseBean.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -184,37 +164,18 @@ public class makeOrder : MonoBehaviour
             case "Espresso":
             if (compareRecipes(espressoRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong bean! try again");
-                chooseBean.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
-                Debug.Log("Good job! You completed the order and earned 15 coins!");
-                chooseBean.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
-                isAnyOrderActive = false;
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
+                success(orderPayout);
             }
             break;
 
             case "Catfrappe":
             if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong bean! try again");
-                chooseBean.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -236,37 +197,18 @@ public class makeOrder : MonoBehaviour
             case "Latte":
             if (compareRecipes(latteRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong milk! try again");
-                chooseMilk.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
-                Debug.Log("Good job! you completed the order and earned 20 coins!");
-                chooseMilk.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
-                isAnyOrderActive = false;
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
+                success(orderPayout);
             }
             break;
 
             case "Catfrappe":
             if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong milk! try again");
-                chooseMilk.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -289,13 +231,7 @@ public class makeOrder : MonoBehaviour
             case "Catfrappe":
             if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong Topping! try again");
-                chooseTopping1.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
@@ -306,6 +242,7 @@ public class makeOrder : MonoBehaviour
             break;
         }
     }
+
     public void chooseCorrectTopping2(Button btn)
     {
         if (btn.name == "chocolateSauce")
@@ -317,28 +254,50 @@ public class makeOrder : MonoBehaviour
             case "Catfrappe":
             if (compareRecipes(catfrappeRecipe, playerRecipe) == false)
             {
-                Debug.Log("Wrong Topping! try again");
-                chooseTopping2.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
-                isAnyOrderActive = false;
+                failed();
             }
             else
             {
-                Debug.Log("Good job! you completed the order and earned 30 coins!");
-                chooseTopping2.SetActive(false);
-                chooseOrder.SetActive(true);
-                playerRecipe = "";
-                Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
-                isAnyOrderActive = false;
-                selectedOrder = "";
-                orderSenderScript.activeOrder = false;
+                success(orderPayout);
             }
             break;
         }
     }
+
+    private void failed() 
+    {
+        Debug.Log("Wrong choice! try again.");
+        chooseOrder.SetActive(true);
+        chooseCup.SetActive(false);
+        chooseBean.SetActive(false);
+        chooseMilk.SetActive(false);
+        chooseTopping1.SetActive(false);
+        chooseTopping2.SetActive(false);
+        playerRecipe = "";
+        selectedOrder = "";
+        orderSenderScript.activeOrder = false;
+        isAnyOrderActive = false;
+        orderPayout = 0;
+    }
+
+    private void success(int orderPayout)
+    {
+        Debug.Log("Good job! You completed the order and earned " + orderPayout + " coins!");
+        chooseOrder.SetActive(true);
+        chooseCup.SetActive(false);
+        chooseBean.SetActive(false);
+        chooseMilk.SetActive(false);
+        chooseTopping1.SetActive(false);
+        chooseTopping2.SetActive(false);
+        playerRecipe = "";
+        Destroy(orderScreen.transform.GetChild(orderIndex).gameObject);
+        isAnyOrderActive = false;
+        selectedOrder = "";
+        orderSenderScript.activeOrder = false;
+        orderPayout = 0;
+    }
+
+
     private bool compareRecipes(string attemptedRecipe, string playerRecipe)
     {
         if (playerRecipe != "")
