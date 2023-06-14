@@ -4,13 +4,13 @@ Shader "Custom/Background"
     {
         _Color ("Tint", Color) = (1, 1, 1, 1)
         _MainTex ("Texture", 2D) = "white" {}
-        _Scaling ("Scaling", float) = 1
-        _HorizontalScrollOffset ("Horizontal Scroll Offset", float) = 40
-        _VerticalScrollOffset ("Vertical Scroll Offset", float) = 40
-        _HorizontalOffset ("Horizontal Offset", float) = 0
-        _VerticalOffset ("Vertical Offset", float) = 0
-        _TopClamp ("Top Clamp", float) = 1
-        _BottomClamp ("Bottom Clamp", float) = -1
+        [PerRenderData]_Scaling ("Scaling", float) = 20
+        [PerRenderData]_HorizontalScrollOffset ("Horizontal Scroll Offset", float) = 40
+        [PerRenderData]_VerticalScrollOffset ("Vertical Scroll Offset", float) = 40
+        [PerRenderData]_HorizontalOffset ("Horizontal Offset", float) = 0
+        [PerRenderData]_VerticalOffset ("Vertical Offset", float) = 0
+        [PerRenderData]_TopClamp ("Top Clamp", float) = 1
+        [PerRenderData]_BottomClamp ("Bottom Clamp", float) = -1
     }
     SubShader
     {

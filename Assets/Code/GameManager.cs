@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         Instance = this;
         levelManager = GetComponent<LevelManager>();
     }
