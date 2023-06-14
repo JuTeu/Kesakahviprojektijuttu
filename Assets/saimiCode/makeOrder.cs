@@ -7,6 +7,7 @@ using System;
 
 public class makeOrder : MonoBehaviour
 {
+    public static makeOrder instance;
     public GameObject chooseCup;
     public GameObject chooseOrder;
     public GameObject chooseBean;
@@ -18,8 +19,9 @@ public class makeOrder : MonoBehaviour
     private GameObject order;
     private GameObject orderScreen;
     private int orderIndex;
-    private int orderPayout;
-    private bool isAnyOrderActive;
+    public int orderPayout;
+    public int successfullOrders = 0;
+    public bool isAnyOrderActive;
     orderSender orderSenderScript;
     private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
     private string espressoRecipe = "E1";
@@ -264,7 +266,7 @@ public class makeOrder : MonoBehaviour
         }
     }
 
-    private void failed() 
+    public void failed() 
     {
         Debug.Log("Wrong choice! try again.");
         chooseOrder.SetActive(true);
@@ -280,7 +282,7 @@ public class makeOrder : MonoBehaviour
         orderPayout = 0;
     }
 
-    private void success(int orderPayout)
+    public void success(int orderPayout)
     {
         Debug.Log("Good job! You completed the order and earned " + orderPayout + " coins!");
         chooseOrder.SetActive(true);
@@ -295,6 +297,7 @@ public class makeOrder : MonoBehaviour
         selectedOrder = "";
         orderSenderScript.activeOrder = false;
         orderPayout = 0;
+        successfullOrders++;
     }
 
 
