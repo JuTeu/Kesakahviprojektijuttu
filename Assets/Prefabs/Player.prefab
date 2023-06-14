@@ -285,7 +285,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 6200000, guid: 428a384345dc2ef40936095fdfa84ba9, type: 2}
+  m_Material: {fileID: 6200000, guid: 5d280cdee04d312408653be2e9a6ac5c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -494,6 +494,9 @@ MonoBehaviour:
   sprites:
   - {fileID: 6621195893314027921}
   maxHealth: 10
+  die:
+    m_PersistentCalls:
+      m_Calls: []
   knockbackResistance: 0
   invulnerableToContactDamage: 0
 --- !u!114 &6621195893854042710
