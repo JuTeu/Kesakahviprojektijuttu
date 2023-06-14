@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomClamp: -1
+    - _BottomClamp: -0.2
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -66,8 +66,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HorizontalOffset: 40
-    - _HorizontalScrollOffset: 40
+    - _HorizontalOffset: 0
+    - _HorizontalScrollOffset: 25
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -76,10 +76,10 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TopClamp: 1
+    - _TopClamp: 0.5
     - _UVSec: 0
-    - _VerticalOffset: 40
-    - _VerticalScrollOffset: 40
+    - _VerticalOffset: -0.6
+    - _VerticalScrollOffset: 25
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

@@ -74,6 +74,7 @@ Shader "Custom/Background"
                 float x = _HorizontalOffset + i.worldPos.x / _Scaling - _WorldSpaceCameraPos.x / _HorizontalScrollOffset;
                 float y = _VerticalOffset + clamp(i.worldPos.y / _Scaling - _WorldSpaceCameraPos.y / _VerticalScrollOffset, _BottomClamp, _TopClamp);
                 fixed4 col = tex2D(_MainTex, float2 (x, y));
+                //fixed4 col = tex2D(_MainTex, i.worldPos.xy);
                 col *= _Color;
                 col *= i.color;
                 return col;
