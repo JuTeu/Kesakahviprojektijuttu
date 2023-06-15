@@ -19,9 +19,9 @@ public class makeOrder : MonoBehaviour
     private GameObject order;
     private GameObject orderScreen;
     private int orderIndex;
-    public int orderPayout;
-    public int successfullOrders = 0;
-    public bool isAnyOrderActive;
+    public static int orderPayout;
+    public static int successfullOrders = 0;
+    public static bool isAnyOrderActive;
     orderSender orderSenderScript;
     private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
     private string espressoRecipe = "E1";
@@ -42,6 +42,7 @@ public class makeOrder : MonoBehaviour
     }
     private void Start() //hide ingredients bcs no order is selected yet
     {
+        instance = this;
         chooseOrder.SetActive(true);
         chooseCup.SetActive(false);
         chooseBean.SetActive(false);

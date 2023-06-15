@@ -3,34 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.UI;
-
+using UnityEngine.SceneManagement;
 public class moneyCounter : MonoBehaviour
 {
-    public TextMeshProUGUI moneyText;
+    [SerializeField] TextMeshProUGUI moneyText;
     private int moneyToBeAdded = 0;
     private int allMoney;
     private int successfullOrderTracker = 0;
 
+    // TODO:
+    //alota FixedUpdate vasta kun tilausten teko näkymä on avattu.
+    //Tää olisi mahdollista (ehkä) gamemanagerista kun hakee levelmanagerin ja levelnamen, mutta
+    //tätä ei saanut sen protection levelin takia (juho, mitä tehdä? ensun scriptei ala ite sorkkii etten riko mitää:D)
+
+    //LevelManager levelManager;
+
+    /*void Start()
+    {
+        levelManager = GetComponent<LevelManager>();
+    }*/
+    private void FixedUpdate()
+    {
+        //if (GameManager.Instance.levelManager.OpenLevel == "saimiTestScene")
+        //{
+            addeableMoney();
+            updateMoney();
+            addeableMoney();
+        //}
+    }
     private void addeableMoney()
     {
-        if (makeOrder.instance.isAnyOrderActive)
+        if (makeOrder.isAnyOrderActive)
         {
-            moneyToBeAdded = makeOrder.instance.orderPayout;
+            moneyToBeAdded = makeOrder.orderPayout;
         }
     }
 
     private void updateMoney()
     {
-        if (makeOrder.instance.successfullOrders > successfullOrderTracker)
+        if (makeOrder.successfullOrders > successfullOrderTracker)
         {
             addMoney(moneyToBeAdded);
-            successfullOrderTracker = makeOrder.instance.successfullOrders;
+            successfullOrderTracker = makeOrder.successfullOrders;
         }
     }
 
     private void deleteAddeableMoney()
     {
-        if (!makeOrder.instance.isAnyOrderActive)
+        if (!makeOrder.isAnyOrderActive)
         {
             moneyToBeAdded = 0;
         }
