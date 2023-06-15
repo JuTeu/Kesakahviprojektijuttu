@@ -12,7 +12,7 @@ public class moneyCounter : MonoBehaviour
     private int successfullOrderTracker = 0;
 
     // TODO:
-    //alota update vasta kun tilausten teko näkymä on avattu.
+    //alota FixedUpdate vasta kun tilausten teko näkymä on avattu.
     //Tää olisi mahdollista (ehkä) gamemanagerista kun hakee levelmanagerin ja levelnamen, mutta
     //tätä ei saanut sen protection levelin takia (juho, mitä tehdä? ensun scriptei ala ite sorkkii etten riko mitää:D)
 
