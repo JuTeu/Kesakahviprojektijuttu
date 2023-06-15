@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Portal
   - Trampoline
+  - Elevator
+  - elevatorTrigger
   layers:
   - Default
   - TransparentFX
