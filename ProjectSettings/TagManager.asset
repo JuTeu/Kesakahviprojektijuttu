@@ -10,6 +10,7 @@ TagManager:
   - Trampoline
   - Elevator
   - elevatorTrigger
+  - upgradeUI
   layers:
   - Default
   - TransparentFX
@@ -52,4 +53,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 97464023
+    locked: 0
+  - name: Player
+    uniqueID: 284607507
     locked: 0

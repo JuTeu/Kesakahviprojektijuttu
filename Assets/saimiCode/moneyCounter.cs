@@ -8,12 +8,16 @@ public class moneyCounter : MonoBehaviour
 {
     public TextMeshProUGUI moneyText;
     private int moneyToBeAdded = 0;
-    private int allMoney;
+    public static int allMoney;
     private int successfullOrderTracker = 0;
+    private bool addingMoney = true;
+    private bool subtractingMoney = false;
+    private upgradeShop upgradeShopScript;
 
     private void Awake()
     {
         moneyText.text = "coins: " + allMoney;
+        upgradeShopScript = GameObject.Find("topBar").GetComponent<upgradeShop>();
     }
 
     //TODO: alota FixedUpdate vasta kun tilausten teko näkymä on avattu.
@@ -35,12 +39,18 @@ public class moneyCounter : MonoBehaviour
         }
     }
 
-    private void updateMoney()
+    public void updateMoney()
     {
         if (makeOrder.successfullOrders > successfullOrderTracker)
         {
-            addMoney(moneyToBeAdded);
+            changeMoney(moneyToBeAdded, addingMoney);
             successfullOrderTracker = makeOrder.successfullOrders;
+        }
+        else if (upgradeShopScript.upgradeBought && upgradeShopScript.sendUpgradeToCounter() != 0)
+        {
+            changeMoney(upgradeShopScript.sendUpgradeToCounter(), subtractingMoney);
+            upgradeShopScript.upgradeBought = false;
+            upgradeShopScript.lastBoughtUpgrade = 0;
         }
     }
 
@@ -52,9 +62,17 @@ public class moneyCounter : MonoBehaviour
         }
     }
 
-    private void addMoney(int value)
+    private void changeMoney(int value, bool plusOrMinus)
     {
-        allMoney += value;
-        moneyText.text = "coins: " + allMoney;
+        if (plusOrMinus)
+        {
+            allMoney += value;
+            moneyText.text = "coins: " + allMoney;
+        }
+        else
+        {
+            allMoney -= value;
+            moneyText.text = "coins: " + allMoney;
+        }
     }
 }
