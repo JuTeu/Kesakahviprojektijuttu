@@ -8,7 +8,7 @@ public class moneyCounter : MonoBehaviour
 {
     public TextMeshProUGUI moneyText;
     private int moneyToBeAdded = 0;
-    private int allMoney;
+    public static int allMoney;
     private int successfullOrderTracker = 0;
 
     private void Awake()
