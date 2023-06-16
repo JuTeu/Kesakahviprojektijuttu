@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Lever : MonoBehaviour
 {
+    public bool oneTimeUse = false;
     [SerializeField] UnityEvent pullLeft, pullRight;
     [SerializeField] Animator anim;
     PlayerMover mover;
@@ -17,12 +18,14 @@ public class Lever : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (mover == null && collision.tag == "Player") mover = collision.gameObject.GetComponent<PlayerMover>();
+        if (mover == null && collision.tag == "Player") mover 
+            = collision.gameObject.GetComponent<PlayerMover>();
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag != "Player" || mover == null) return;
+        if (collision.tag != "Player" || mover == null ||
+            oneTimeUse && currentDirection) return;
 
         if (!alreadyPulled && mover.GetMoveInput() == Vector2.up)
         {
