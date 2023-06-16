@@ -9,6 +9,8 @@ public class topbarNavigation : MonoBehaviour
     public GameObject collectibles;
     public GameObject upgrades;
     public GameObject returnButton;
+    public GameObject[] upgradesPages;
+
 
     public void upgradeScreen()
     {
@@ -16,6 +18,7 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(false);
         upgrades.SetActive(true);
         returnButton.SetActive(true);
+        upgradesPages[0].SetActive(true);
     }
     public void collectiblesScreen()
     {
@@ -23,6 +26,10 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(true);
         upgrades.SetActive(false);
         returnButton.SetActive(true);
+        foreach (GameObject pages in upgradesPages)
+        {
+            pages.SetActive(false);
+        }
     }
     public void inventoryScreen()
     {
@@ -30,6 +37,10 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(false);
         upgrades.SetActive(false);
         returnButton.SetActive(true);
+        foreach (GameObject pages in upgradesPages)
+        {
+            pages.SetActive(false);
+        }
     }
 
     public void returnButtonFunc()
@@ -38,5 +49,26 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(false);
         upgrades.SetActive(false);
         returnButton.SetActive(false);
+        foreach (GameObject pages in upgradesPages)
+        {
+            pages.SetActive(false);
+        }
+    }
+
+    public void upgradesNextPage()
+    {
+        int index = 0;
+        for (int i = 0; i < upgradesPages.Length; i++)
+        {
+            if (upgradesPages[i].activeSelf == true)
+            {
+                index = i;
+            }
+        }
+        foreach (GameObject pages in upgradesPages)
+        {
+            pages.SetActive(true);
+        }
+        upgradesPages[index].SetActive(false);
     }
 }
