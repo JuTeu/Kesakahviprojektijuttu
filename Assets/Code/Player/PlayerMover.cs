@@ -103,6 +103,11 @@ public class PlayerMover : MonoBehaviour
         rb.velocity = velocity;
     }
 
+    public Vector2 GetMoveInput()
+    {
+        return inputReader.GetMoveInput();
+    }
+
     private void PlatformerMode()
     {
         if (!GameManager.playerIsInControl) return;
