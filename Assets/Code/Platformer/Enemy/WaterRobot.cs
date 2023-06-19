@@ -6,6 +6,7 @@ public class WaterRobot : MonoBehaviour
 {
     [SerializeField] Animator mainAnim, bodyAnim, handsAnim;
     [SerializeField] Vector2 patrol1, patrol2;
+    [SerializeField] GameObject drop;
     Transform playerTransform;
     Vector2 patrolTarget;
     bool playerIsNear = false, isAlive = true;
@@ -37,13 +38,19 @@ public class WaterRobot : MonoBehaviour
         if (!isAlive) return;
         if (playerIsNear)
         {
-            if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingLeft") && playerTransform.position.x > transform.position.x) bodyAnim.Play("TurnToRight");
-            else if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingRight") && playerTransform.position.x < transform.position.x) bodyAnim.Play("TurnToLeft");
+            if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingLeft")
+            && playerTransform.position.x > transform.position.x)
+            bodyAnim.Play("TurnToRight");
+            else if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingRight")
+            && playerTransform.position.x < transform.position.x)
+            bodyAnim.Play("TurnToLeft");
         }
         else
         {
-            if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingLeft") && patrolTarget.x > transform.position.x) bodyAnim.Play("TurnToRight");
-            else if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingRight") && patrolTarget.x < transform.position.x) bodyAnim.Play("TurnToLeft");
+            if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingLeft") &&
+            patrolTarget.x > transform.position.x) bodyAnim.Play("TurnToRight");
+            else if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("FacingRight")
+            && patrolTarget.x < transform.position.x) bodyAnim.Play("TurnToLeft");
         }
 
         if (!handsAnim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -65,5 +72,6 @@ public class WaterRobot : MonoBehaviour
         isAlive = false;
         handsAnim.Play("Die");
         mainAnim.Play("Die");
+        if (drop != null) Instantiate(drop, transform.position, Quaternion.identity);
     }
 }

@@ -752,6 +752,7 @@ MonoBehaviour:
   handsAnim: {fileID: 10831104269206372}
   patrol1: {x: 0, y: 0}
   patrol2: {x: 0, y: 0}
+  drop: {fileID: 7286562550888304275, guid: b511da45bc187784cbb48b6339e054e3, type: 3}
 --- !u!61 &10831103466021030
 BoxCollider2D:
   m_ObjectHideFlags: 0

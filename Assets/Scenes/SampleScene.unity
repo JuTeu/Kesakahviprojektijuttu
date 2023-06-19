@@ -6869,8 +6869,7 @@ MonoBehaviour:
   collectibles: {fileID: 1570944058}
   upgrades: {fileID: 1291697029}
   returnButton: {fileID: 1237111287}
-  upgradesPage1: {fileID: 208018584}
-  upgradesPage2: {fileID: 0}
+  upgradesPages: []
 --- !u!114 &1938094096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7527,6 +7526,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621195893854042699, guid: 3aeb28c700c7c8b4da1f69f840f20b30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621195894387327331, guid: 3aeb28c700c7c8b4da1f69f840f20b30, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

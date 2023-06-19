@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMagic : MonoBehaviour
 {
     Rigidbody2D rb;
+    int maxMagicPower = 10;
+    int magicPower;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] GameObject fireSpell;
     bool spellCooldown = false;
@@ -12,6 +14,7 @@ public class PlayerMagic : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        magicPower = maxMagicPower;
     }
 
     // Update is called once per frame
@@ -20,12 +23,27 @@ public class PlayerMagic : MonoBehaviour
         
     }
 
+    public void GainMagicPower(int amount)
+    {
+        magicPower += amount;
+        if (magicPower > maxMagicPower) magicPower = maxMagicPower;
+    }
+
     public void CastMagic(bool input, Vector2 moveInput)
     {
         if (input && !spellCooldown)
         {
             spellCooldown = true;
-            StartCoroutine(FireSpell());
+            if (magicPower >= 2)
+            {
+                StartCoroutine(FireSpell());
+                magicPower -= 2;
+            }
+            else
+            {
+                spellCooldown = false;
+            }
+            Debug.Log("MP: " + magicPower);
         }
     }
 
