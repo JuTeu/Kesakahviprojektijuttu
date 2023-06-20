@@ -45,15 +45,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: Ground-2
+    uniqueID: 2488106795
     locked: 0
-  - name: BehingGround
+  - name: Ground-1
     uniqueID: 529571679
     locked: 0
   - name: Ground
     uniqueID: 97464023
     locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
   - name: Player
     uniqueID: 284607507
+    locked: 0
+  - name: Player +1
+    uniqueID: 3691491677
     locked: 0
