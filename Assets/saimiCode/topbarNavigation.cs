@@ -19,6 +19,10 @@ public class topbarNavigation : MonoBehaviour
         upgrades.SetActive(true);
         returnButton.SetActive(true);
         upgradesPages[0].SetActive(true);
+        for (int i = 1; i < upgradesPages.Length; i++)
+        {
+            upgradesPages[i].SetActive(false);
+        }
     }
     public void collectiblesScreen()
     {
