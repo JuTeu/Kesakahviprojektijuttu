@@ -28,6 +28,15 @@ public class risingPlatform : MonoBehaviour
             gameObject.transform.position = respawnPoint.position;
         }
     }
-  
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.transform.SetParent(transform);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.transform.SetParent(null);
+    }
+
 }
 
