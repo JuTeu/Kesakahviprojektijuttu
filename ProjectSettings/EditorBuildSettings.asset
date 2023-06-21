@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/saimiTestScene.unity
     guid: 5a934dd4d281cd74db68fcace1ca0f79
+  - enabled: 1
+    path: Assets/Scenes/LevelSelectMenu.unity
+    guid: fff86e2541abe0744b71cb6c05a53496
+  - enabled: 1
+    path: Assets/Scenes/WaterTemple.unity
+    guid: a5185e0c7474e0f4fa9152bf710b881a
   m_configObjects: {}

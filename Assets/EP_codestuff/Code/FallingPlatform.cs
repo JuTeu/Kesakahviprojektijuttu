@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EcoExplorer
-{
+
     public class FallingPlatform : MonoBehaviour
     {
         private float fallDelay = 1f;
@@ -32,7 +31,7 @@ namespace EcoExplorer
         {
             if (collision.gameObject.CompareTag("Player") && !platformMovingBack) 
             {
-                Invoke("DropPlatform", 0.5f);
+                Invoke("DropPlatform", 1f);
             }
         }
 
@@ -51,4 +50,4 @@ namespace EcoExplorer
             platformMovingBack = true;
         }
     } 
-}
+

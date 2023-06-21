@@ -5,31 +5,55 @@ using UnityEngine;
 public class PortalTest : MonoBehaviour
 {
     [SerializeField] Animator anim;
+    [SerializeField] PlayerMover playerMover;
     public bool animate = true;
+    bool playerIsNear = false, alreadyInteracted = false;
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player" && animate && !GameManager.playerIsReturningFromPortal)
         {
             anim.Play("PortalOpen");
         }
+
+        playerIsNear = true;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
+        playerIsNear = false;
+        
         if(collision.tag == "Player" && animate && !GameManager.playerIsReturningFromPortal)
         {
             anim.Play("PortalClose");
         }
+        
         else if (collision.tag == "Player" && GameManager.playerIsReturningFromPortal)
         {
-            GameManager.playerIsReturningFromPortal = false;
+            //GameManager.playerIsReturningFromPortal = false;
             animate = true;
+        }
+
+        
+    }
+
+    void Update()
+    {
+        if (!playerIsNear) return;
+        if(playerMover.interacting && !alreadyInteracted)
+        {
+            alreadyInteracted = true;
+            GameManager.OpenLevel("LevelSelectMenu");
+            GameManager.playerIsInControl = false;
+        }
+        else if (!playerMover.interacting)
+        {
+            alreadyInteracted = false;
         }
     }
 }
