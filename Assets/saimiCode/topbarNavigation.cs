@@ -9,6 +9,7 @@ public class topbarNavigation : MonoBehaviour
     public GameObject collectibles;
     public GameObject upgrades;
     public GameObject returnButton;
+    public GameObject collectiblesInfoBox;
     public GameObject[] upgradesPages;
 
 
@@ -28,6 +29,7 @@ public class topbarNavigation : MonoBehaviour
     {
         inventory.SetActive(false);
         collectibles.SetActive(true);
+        collectiblesInfoBox.SetActive(false);
         upgrades.SetActive(false);
         returnButton.SetActive(true);
         foreach (GameObject pages in upgradesPages)
