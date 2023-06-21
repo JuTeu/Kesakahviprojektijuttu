@@ -2724,6 +2724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1302298814}
+  playerMover: {fileID: 406475532}
   animate: 1
 --- !u!61 &584034774
 BoxCollider2D:

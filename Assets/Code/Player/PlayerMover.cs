@@ -54,9 +54,6 @@ public class PlayerMover : MonoBehaviour
         magic = GetComponent<PlayerMagic>();
         velocity = new Vector2();
         posOffset = new Vector3(0.45f, 0f, 0f);
-        if (rb == null) {
-            Debug.LogError($"{gameObject} is missing the RigidBody2D component!");
-        }
 
         spriteScale = sprite.gameObject.GetComponent<Transform>();
 
@@ -108,6 +105,11 @@ public class PlayerMover : MonoBehaviour
         return inputReader.GetMoveInput();
     }
 
+    public bool GetAction1Input()
+    {
+        return inputReader.GetJumpInput();
+    }
+
     private void PlatformerMode()
     {
         if (!GameManager.playerIsInControl) return;
@@ -156,17 +158,24 @@ public class PlayerMover : MonoBehaviour
         float dec = onGround ? deceleration : airDeceleration;
         float acc = onGround ? acceleration : airAcceleration;
         float tur = onGround ? turning : airTurning;
-        if (direction.x != 0f) {
-            if ((direction.x == -1f && velocity.x > 0) || (direction.x == 1f && velocity.x < 0)) {
+        if (direction.x != 0f)
+        {
+            if ((direction.x == -1f && velocity.x > 0) || (direction.x == 1f && velocity.x < 0))
+            {
                 velocityChange = tur * Time.fixedDeltaTime;
-            } else {
+            }
+            else
+            {
                 velocityChange = acc * Time.fixedDeltaTime;
             }
-        } else {
+        }
+        else
+        {
             velocityChange = dec * Time.fixedDeltaTime;
         }
         velocity.x = Mathf.MoveTowards(velocity.x, direction.x * speed, velocityChange);
-        if (direction.x != 0) {
+        if (direction.x != 0)
+        {
             
             if (direction.x == 1f)
             {
@@ -202,23 +211,28 @@ public class PlayerMover : MonoBehaviour
     }
     private void Jump(bool input)
     {
-        if (input && !alreadyJumped) {
+        if (input && !alreadyJumped)
+        {
             jumpBuffer = maxJumpBuffer;
             alreadyJumped = true;
         }
-        if (jumpBuffer > 0 && coyoteTime > 0) {
-            velocity.y =+ jumpVelocity;
+        if (jumpBuffer > 0 && coyoteTime > 0)
+        {
+            velocity.y = jumpVelocity;
             coyoteTime = 0;
             jumpBuffer = 0;
             timeSinceJump = shortestJump * 0.1f;
         }
-        if (!input && velocity.y > 0 && variableJumpHeight && !(timeSinceJump > 0)) {
+        if (!input && velocity.y > 0 && variableJumpHeight && !(timeSinceJump > 0))
+        {
             velocity.y = velocity.y / 1.3f;
         }
-        if (!(coyoteTime > 0) && velocity.y < -0.1f) {
+        if (!(coyoteTime > 0) && velocity.y < -0.1f)
+        {
             velocity.y = Mathf.MoveTowards(velocity.y, downwardVelocityCap, extraFallingSpeed * 0.1f);
         }
-        if (!input && alreadyJumped) {
+        if (!input && alreadyJumped)
+        {
             alreadyJumped = false;
         }
     }

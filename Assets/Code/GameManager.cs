@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     // Kahvila = 0, Tasohyppy = 1
     public static int gameMode = 0;
 
-    // 0 = Kahvila, -1 = testi kenttä
+    // 0 = Testikenttä, 1 = Vesi temppeli
     public static int currentLevel = 0;
 
     public GameObject cafe;
