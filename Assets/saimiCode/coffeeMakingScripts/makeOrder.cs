@@ -19,8 +19,9 @@ public class makeOrder : MonoBehaviour
     private GameObject order;
     private GameObject orderScreen;
     private int orderIndex;
-    public static int orderPayout;
+    public static float orderPayout;
     public static int successfullOrders = 0;
+    public static float normalCoffeePayout = 20, espressoPayout = 15, catfrappePayout = 30;
     public static bool isAnyOrderActive;
     orderSender orderSenderScript;
     private string latteRecipe = "L1M"; //L for latte, 1 for bean type1, FM for frothed milk
@@ -68,17 +69,18 @@ public class makeOrder : MonoBehaviour
         {
             case "OrderLatte":
             selectedOrder = "Latte";
-            orderPayout = 20;
+
+            orderPayout = normalCoffeePayout;
             break;
             
             case "OrderEspresso":
             selectedOrder = "Espresso";
-            orderPayout = 15;
+            orderPayout = espressoPayout;
             break;
 
             case "OrderCatfrappe":
             selectedOrder = "Catfrappe";
-            orderPayout = 30;
+            orderPayout = catfrappePayout;
             break;
         }
     }
@@ -283,7 +285,7 @@ public class makeOrder : MonoBehaviour
         orderPayout = 0;
     }
 
-    public void success(int orderPayout)
+    public void success(float orderPayout)
     {
         Debug.Log("Good job! You completed the order and earned " + orderPayout + " coins!");
         chooseOrder.SetActive(true);

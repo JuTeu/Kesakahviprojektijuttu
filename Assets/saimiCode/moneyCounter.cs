@@ -7,8 +7,8 @@ using Unity.UI;
 public class moneyCounter : MonoBehaviour
 {
     public TextMeshProUGUI moneyText;
-    private int moneyToBeAdded = 0;
-    public static int allMoney;
+    private float moneyToBeAdded = 0;
+    public static float allMoney;
     private int successfullOrderTracker = 0;
     private bool addingMoney = true;
     private bool subtractingMoney = false;
@@ -62,7 +62,7 @@ public class moneyCounter : MonoBehaviour
         }
     }
 
-    private void changeMoney(int value, bool plusOrMinus)
+    private void changeMoney(float value, bool plusOrMinus)
     {
         if (plusOrMinus)
         {
