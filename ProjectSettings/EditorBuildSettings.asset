@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WaterTemple.unity
     guid: a5185e0c7474e0f4fa9152bf710b881a
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c33dce26c691eb542abdbf72ebfc72ee
   m_configObjects: {}
