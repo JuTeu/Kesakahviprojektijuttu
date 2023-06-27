@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST T
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7701,7 +7701,7 @@ GameObject:
   - component: {fileID: 1927626107}
   - component: {fileID: 1927626106}
   m_Layer: 5
-  m_Name: collectible2
+  m_Name: collectible3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7938,6 +7938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade1Cost: 50
+  upgrade2Cost: 0
   table: {fileID: 1773230973}
   upgradeBought: 0
   lastBoughtUpgrade: 0
@@ -7954,7 +7955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoBox: {fileID: 1110191548}
-  infoText: {fileID: 0}
+  infoText: {fileID: 534138541}
 --- !u!1 &1991098512
 GameObject:
   m_ObjectHideFlags: 0
