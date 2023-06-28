@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class CircleMovement : MonoBehaviour
+public class SunMovement : MonoBehaviour
 {
     public float speed;
 
@@ -18,6 +18,6 @@ public class CircleMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Rotate(0f, 0f, -5f * Time.deltaTime * speed);
+        gameObject.transform.Rotate(0f, 0f, 5f * Time.deltaTime * speed);
     }
 }

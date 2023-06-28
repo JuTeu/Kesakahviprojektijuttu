@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tasohyppelynasettaminen : MonoBehaviour
 {
+    [SerializeField] int PeliMoodi;
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -11,7 +12,7 @@ public class Tasohyppelynasettaminen : MonoBehaviour
         // IEnumeratorilla odotetaan että pelaajan scriptissä se on asetettu, jonka jälkeen se muutetaan toiseksi
 
         yield return new WaitForSeconds(0.5f);
-        GameManager.SetGameMode(1);
+        GameManager.SetGameMode(PeliMoodi);
         
         
     }
