@@ -5756,11 +5756,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6621195893854042699, guid: 3aeb28c700c7c8b4da1f69f840f20b30, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.1
+      value: -42.34
       objectReference: {fileID: 0}
     - target: {fileID: 6621195893854042699, guid: 3aeb28c700c7c8b4da1f69f840f20b30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 38.2
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 6621195893854042699, guid: 3aeb28c700c7c8b4da1f69f840f20b30, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6028,6 +6028,10 @@ PrefabInstance:
     - target: {fileID: 7015761806435739078, guid: e9d109a0938f28841993d6009ba58966, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015761806435739079, guid: e9d109a0938f28841993d6009ba58966, type: 3}
+      propertyPath: PeliMoodi
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9d109a0938f28841993d6009ba58966, type: 3}
