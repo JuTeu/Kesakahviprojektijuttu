@@ -10,7 +10,6 @@ public class topbarNavigation : MonoBehaviour
     public GameObject upgrades;
     public GameObject returnButton;
     public GameObject collectiblesInfoBox;
-    public GameObject[] upgradesPages;
 
 
     public void upgradeScreen()
@@ -19,11 +18,6 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(false);
         upgrades.SetActive(true);
         returnButton.SetActive(true);
-        upgradesPages[0].SetActive(true);
-        for (int i = 1; i < upgradesPages.Length; i++)
-        {
-            upgradesPages[i].SetActive(false);
-        }
     }
     public void collectiblesScreen()
     {
@@ -32,10 +26,6 @@ public class topbarNavigation : MonoBehaviour
         collectiblesInfoBox.SetActive(false);
         upgrades.SetActive(false);
         returnButton.SetActive(true);
-        foreach (GameObject pages in upgradesPages)
-        {
-            pages.SetActive(false);
-        }
     }
     public void inventoryScreen()
     {
@@ -43,10 +33,6 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(false);
         upgrades.SetActive(false);
         returnButton.SetActive(true);
-        foreach (GameObject pages in upgradesPages)
-        {
-            pages.SetActive(false);
-        }
     }
 
     public void returnButtonFunc()
@@ -55,26 +41,7 @@ public class topbarNavigation : MonoBehaviour
         collectibles.SetActive(false);
         upgrades.SetActive(false);
         returnButton.SetActive(false);
-        foreach (GameObject pages in upgradesPages)
-        {
-            pages.SetActive(false);
-        }
     }
 
-    public void upgradesNextPage()
-    {
-        int index = 0;
-        for (int i = 0; i < upgradesPages.Length; i++)
-        {
-            if (upgradesPages[i].activeSelf == true)
-            {
-                index = i;
-            }
-        }
-        foreach (GameObject pages in upgradesPages)
-        {
-            pages.SetActive(true);
-        }
-        upgradesPages[index].SetActive(false);
-    }
+
 }
