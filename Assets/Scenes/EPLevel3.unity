@@ -3031,6 +3031,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7015761806435739079, guid: e9d109a0938f28841993d6009ba58966, type: 3}
+      propertyPath: PeliMoodi
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9d109a0938f28841993d6009ba58966, type: 3}
 --- !u!1 &1284406601
