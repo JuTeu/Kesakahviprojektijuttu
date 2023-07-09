@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class LevelSelectMenu : MonoBehaviour
 {
     [SerializeField] Animator anim;
-    [SerializeField] TextMeshProUGUI text1, text2l, text2r, text3;
-    string[] test = {"Sivu 1", "kolme", "Viisi sivu"};
-    string[] test2 = {"sivu kaks", "neöjä", "kuusi"};
-    int levelCount, currentLevel = 0;
+    [SerializeField] TextMeshProUGUI title1, percent1, title2, percent2, startText1, startText2;
+    [SerializeField] Button startButton;
+
+    string startText = "Aloita";
+    string[] levelName = {"Testikenttä", "Vesitemppeli", "Joku"};
+    string[] test2 = {"2%", "4%", "6%"};
+
+    int levelCount, currentLevel;
     bool releasedOpenButton = false;
     PlayerMover playerMover;
     // Start is called before the first frame update
     void Start()
     {
+        startText1.text = startText;
+        startText2.text = startText;
+
         playerMover = GameObject.FindWithTag("Player").GetComponent<PlayerMover>();
-        levelCount = test.Length - 1;
-        text2r.text = test[currentLevel];
-        text3.text = test2[currentLevel];
+        currentLevel = GameManager.currentLevel;
+        levelCount = levelName.Length - 1;
+        title2.text = levelName[currentLevel];
+        percent2.text = test2[currentLevel];
     }
 
     // Update is called once per frame
@@ -40,21 +49,21 @@ public class LevelSelectMenu : MonoBehaviour
 
         if (playerMover.GetMoveInput().x < 0 && currentLevel > 0)
         {
-            text1.text = test[currentLevel - 1];
-            text2r.text = test[currentLevel];
+            title1.text = levelName[currentLevel - 1];
+            title2.text = levelName[currentLevel];
             
-            text2l.text = test2[currentLevel - 1];
+            percent1.text = test2[currentLevel - 1];
 
             currentLevel--;
             anim.Play("TurnPageLeft");
         }
         else if (playerMover.GetMoveInput().x > 0 && currentLevel < levelCount)
         {
-            text1.text = test[currentLevel];
-            text2r.text = test[currentLevel + 1];
+            title1.text = levelName[currentLevel];
+            title2.text = levelName[currentLevel + 1];
 
-            text2l.text = test2[currentLevel];
-            text3.text = test2[currentLevel + 1];
+            percent1.text = test2[currentLevel];
+            percent2.text = test2[currentLevel + 1];
             currentLevel++;
             anim.Play("TurnPageRight");
         }
@@ -62,7 +71,7 @@ public class LevelSelectMenu : MonoBehaviour
 
     public void PageTurned()
     {
-        text2r.text = test[currentLevel];
-        text3.text = test2[currentLevel];
+        title2.text = levelName[currentLevel];
+        percent2.text = test2[currentLevel];
     }
 }

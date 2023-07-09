@@ -34,7 +34,7 @@ public class orderSpawner : MonoBehaviour
     private void Update()
     {
         _time = Time.deltaTime;
-        if (_interval = 0.1f)
+        if (_interval == 0.1f)
         {
             _interval = Random.Range(25, 45);
         }
@@ -47,7 +47,7 @@ public class orderSpawner : MonoBehaviour
     }
     public void dayTracker()
     {
-        if (orderCounter = 12)
+        if (orderCounter == 12)
         {
             _interval = 9999999999999f;
             //poput window to show how much money made that day, how many orders server (if you ended day early, its less than 12 etc)

@@ -14621,6 +14621,7 @@ MonoBehaviour:
   fireGlow: {fileID: 6585837833840375032}
   ball: {fileID: 6585837834443724216}
   fireExplosion: {fileID: 1000654915}
+  isPlayerAligned: 1
 --- !u!58 &6585837833880305327
 CircleCollider2D:
   m_ObjectHideFlags: 0
