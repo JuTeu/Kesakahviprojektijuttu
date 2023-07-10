@@ -21,7 +21,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float extraFallingSpeed = 3;
     [SerializeField] private bool variableJumpHeight = true;
 
-    [SerializeField] private float playerCafeScalingModifier = 0.1f;
+    private float playerCafeScalingModifier;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator anim;
     [SerializeField] private Collider2D meleeCollider;
@@ -47,6 +47,7 @@ public class PlayerMover : MonoBehaviour
     }
     private void Awake()
     {
+        playerCafeScalingModifier = GameManager.cafeScalingModifier;
         inputReader = GetComponent<InputReader>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();

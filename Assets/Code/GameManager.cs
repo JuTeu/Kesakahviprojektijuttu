@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public static int currentLevel = 0;
 
     public GameObject cafe;
+    public static float cafeScalingModifier = 0.1f;
+
     public GameObject player;
     Collider2D[] cafeColliders;
     LevelManager levelManager;
@@ -42,10 +44,14 @@ public class GameManager : MonoBehaviour
         if (mode == 0)
         {
             GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>().gravityScale = 0;
+            GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>().size = new Vector2(0.9f, 0.4f);
+            GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>().offset = new Vector2(0f, -0.2f);
         }
         else if (mode == 1)
         {
             GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>().gravityScale = 2;
+            GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>().size = new Vector2(0.9f, 0.9f);
+            GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
         }
         gameMode = mode;
     }
