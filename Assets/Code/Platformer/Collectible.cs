@@ -17,6 +17,15 @@ public class Collectible : MonoBehaviour
         )
         Destroy(gameObject);
 
+        Sprite newSprite = GameManager.GetCollectibleSprite(id + 1);
+        if (newSprite != null)
+        {
+            gameObject.transform.Find("CollectibleSprite").GetComponent<SpriteRenderer>().sprite = newSprite;
+        }
+        else
+        {
+            Debug.LogError($"Kenttään nro. {GameManager.currentLevel} ei ole määritetty kerrättävän {id} spritea, määrittele se GameManagerin LevelManager komponentissa! (määriteltävän indeksi: {GameManager.currentLevel * 4 + id + 1})");
+        }
         anim = GetComponent<Animator>();
     }
 

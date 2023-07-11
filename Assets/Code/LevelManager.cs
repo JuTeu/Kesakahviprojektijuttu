@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     bool levelIsLoaded = false;
+    [SerializeField] Sprite[] collectibleSprites;
 
-    public bool GetIsLevelLoaded() { return levelIsLoaded; }
+    public bool GetIsLevelLoaded() => levelIsLoaded;
     
     void Start()
     {
@@ -37,5 +38,14 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
         levelIsLoaded = true;
+    }
+
+    public Sprite GetCollectibleSprite(int id, bool specifyLevel)
+    {
+        int index = GameManager.currentLevel * 4 + id;
+        if (specifyLevel) index = id;
+        if (collectibleSprites.Length > index)
+        return collectibleSprites[index];
+        return null;
     }
 }

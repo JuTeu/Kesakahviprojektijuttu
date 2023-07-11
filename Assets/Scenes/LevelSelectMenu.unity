@@ -244,7 +244,28 @@ MonoBehaviour:
   percent2: {fileID: 883373623}
   startText1: {fileID: 963375924}
   startText2: {fileID: 1105858305}
+  itemIcons1:
+  - {fileID: 832859061}
+  - {fileID: 1083944652}
+  - {fileID: 2024501017}
+  - {fileID: 649986590}
+  itemIcons2:
+  - {fileID: 512309194}
+  - {fileID: 663481368}
+  - {fileID: 1835089249}
+  - {fileID: 1668829719}
+  checkMarks1:
+  - {fileID: 499228960}
+  - {fileID: 941400953}
+  - {fileID: 1322374353}
+  checkMarks2:
+  - {fileID: 1174786131}
+  - {fileID: 1748052942}
+  - {fileID: 434345693}
   startButton: {fileID: 2068707524}
+  missingIcon: {fileID: 21300000, guid: eccba75cb8984b04e9500e9f9b5919eb, type: 3}
+  uncheck: {fileID: 21300000, guid: 183d981520d050a44b5ba38fa211ffdb, type: 3}
+  check: {fileID: 21300000, guid: b80d60a854a057744ad53e4ee465ee5b, type: 3}
 --- !u!224 &19012233
 RectTransform:
   m_ObjectHideFlags: 0

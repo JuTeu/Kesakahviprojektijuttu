@@ -124,4 +124,6 @@ public class GameManager : MonoBehaviour
     {
         return Instance.levelManager.GetIsLevelLoaded();
     }
+
+    public static Sprite GetCollectibleSprite(int id, bool specifyLevel = false) => Instance.levelManager.GetCollectibleSprite(id, specifyLevel);
 }

@@ -7649,7 +7649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  anim: {fileID: 1526005522}
 --- !u!58 &1526005525
 CircleCollider2D:
   m_ObjectHideFlags: 0
