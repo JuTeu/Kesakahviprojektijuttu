@@ -18453,6 +18453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cafe: {fileID: 1374577653}
   player: {fileID: 406475526}
+  cafeMainRoom: {fileID: 681623851}
 --- !u!4 &1825358707
 Transform:
   m_ObjectHideFlags: 0

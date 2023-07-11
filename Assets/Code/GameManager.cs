@@ -6,32 +6,61 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+
+    /*-----------/
+    /   Vakiot   /
+    /-----------*/
+
     // Onko peli mobiililaitteella vai ei. Vaikuttaa esim. käyttöliittymään.
-    public static bool isMobile = false;
+    public const bool isMobile = false;
+    // Miten asiat skaalautuvat kahvilassa suhteessa niiden sijaintiin y-aksellilla.
+    public const float cafeScalingModifier = 0.1f;
+
+
+    /*------------------------/
+    /   Globaalit muuttujat   /
+    /------------------------*/
 
     public static bool playerIsInControl = true;
-
     public static bool levelExitPortalFinishedClosing = false;
     public static bool playerIsReturningFromPortal = false;
-
-    
     // Kahvila = 0, Tasohyppy = 1
     public static int gameMode = 0;
 
+
+    /*-------------------------/
+    /   Tallennettavat asiat   /
+    /-------------------------*/
+    
     // 0 = Testikenttä, 1 = Vesi temppeli
-    public static int currentLevel = 0;
+    public static int currentLevel;
 
-    public GameObject cafe;
-    public static float cafeScalingModifier = 0.1f;
+    // 1 = Kenttä on avattu; 10 = Kenttä on suoritettu; 100, 1000, 10000 = Kerättävät
+    public static int[] levels;
 
-    public GameObject player;
+
+    /*-------------------------------------------/
+    /   GameManagerin viitteet muihin olioihin   /
+    /-------------------------------------------*/
+
     Collider2D[] cafeColliders;
     LevelManager levelManager;
+    [SerializeField] GameObject cafe, player, cafeMainRoom;
+
 
     void Start()
     {
         Instance = this;
         levelManager = GetComponent<LevelManager>();
+
+        currentLevel = 0;
+
+        levels = new int[3];
+        for (int i = 0; i < levels.Length; i++)
+        {
+            levels[i] = PlayerPrefs.GetInt("Level" + i, 0);
+        }
+
     }
 
     void Update()
@@ -61,7 +90,7 @@ public class GameManager : MonoBehaviour
         Instance.cafeColliders = Instance.cafe.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D col in Instance.cafeColliders)
         {
-            if (col != null && col.gameObject.name != "Placeholder_Room_1") col.enabled = toggle;
+            if (col != null && col.gameObject != Instance.cafeMainRoom) col.enabled = toggle;
         }
     }
 
