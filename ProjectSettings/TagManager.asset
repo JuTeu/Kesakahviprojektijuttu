@@ -11,6 +11,9 @@ TagManager:
   - Elevator
   - elevatorTrigger
   - upgradeUI
+  - reward1
+  - reward2
+  - reward3
   layers:
   - Default
   - TransparentFX
