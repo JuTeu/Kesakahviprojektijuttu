@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
         currentLevel = 0;
 
-        levels = new int[3];
+        levels = new int[levelManager.GetLevelNames().Length];
         for (int i = 0; i < levels.Length; i++)
         {
             levels[i] = PlayerPrefs.GetInt("Level" + i, 0);
@@ -85,6 +85,15 @@ public class GameManager : MonoBehaviour
             GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
         }
         gameMode = mode;
+    }
+
+    public static string GetLevelName(int id)
+    {
+        if (Instance.levelManager.GetLevelNames().Length > id)
+        {
+            return Instance.levelManager.GetLevelNames()[id];
+        }
+        return null;
     }
 
     public static void EnableCafeCollisions(bool toggle)

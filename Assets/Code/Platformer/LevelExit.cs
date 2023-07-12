@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestLevelExit : MonoBehaviour
+public class LevelExit : MonoBehaviour
 {
     bool portalClosingFinished = false;
+
     Health playerHealth;
     GameObject player;
     // Start is called before the first frame update
@@ -12,6 +13,16 @@ public class TestLevelExit : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         playerHealth = player.GetComponent<Health>();
+
+        Sprite newSprite = GameManager.GetCollectibleSprite(GameManager.currentLevel);
+        if (newSprite != null)
+        {
+            gameObject.transform.Find("CollectibleSprite").GetComponent<SpriteRenderer>().sprite = newSprite;
+        }
+        else
+        {
+            Debug.LogError($"Kenttään nro. {GameManager.currentLevel} ei ole määritetty kentän lopun spritea, määrittele se GameManagerin LevelManager komponentissa! (määriteltävän indeksi: {GameManager.currentLevel * 4})");
+        }
     }
 
     // Update is called once per frame
@@ -19,7 +30,7 @@ public class TestLevelExit : MonoBehaviour
     {
         portalClosingFinished = GameManager.levelExitPortalFinishedClosing;
 
-        if (playerHealth.GetHealth() <= 0 || player.transform.position.y < -10)
+        if (playerHealth.GetHealth() <= 0 || player.transform.position.y < -200)
         {
             player.transform.position = Vector2.zero;
             playerHealth.Heal(10);
@@ -36,6 +47,7 @@ public class TestLevelExit : MonoBehaviour
 
    IEnumerator ExitLevel()
     {
+        GameManager.levels[GameManager.currentLevel] |= 0b_10;
         GameManager.playerIsInControl = false;
         GameManager.playerIsReturningFromPortal = true;
         GameManager.ActivateCafe(true);

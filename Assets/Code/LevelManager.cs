@@ -8,7 +8,10 @@ public class LevelManager : MonoBehaviour
     bool levelIsLoaded = false;
     [SerializeField] Sprite[] collectibleSprites;
 
+    [SerializeField] string[] levelNames;
+
     public bool GetIsLevelLoaded() => levelIsLoaded;
+    public string[] GetLevelNames() => levelNames;
     
     void Start()
     {

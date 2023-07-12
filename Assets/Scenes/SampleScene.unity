@@ -14224,7 +14224,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316304397}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -18459,6 +18459,9 @@ MonoBehaviour:
   collectibleSprites:
   - {fileID: 21300000, guid: eccba75cb8984b04e9500e9f9b5919eb, type: 3}
   - {fileID: 21300000, guid: a40339af80b43ed00bc5a4f9cdd3eb54, type: 3}
+  levelNames:
+  - PlatformerTestLevel
+  - WaterTemple
 --- !u!114 &1825358709
 MonoBehaviour:
   m_ObjectHideFlags: 0
