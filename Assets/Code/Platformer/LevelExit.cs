@@ -62,7 +62,7 @@ public class LevelExit : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.1f); // Lapset ei tule muuten mukana
         camera.transform.SetParent(null);
         GameManager.TurnCafeIntoAChildOfThePlayer(false);
-        GameManager.CloseLevel("PlatformerTestLevel");
+        GameManager.CloseLevel(GameManager.GetLevelName(GameManager.currentLevel));
         GameManager.EnableCafeCollisions(true);
         GameManager.SetGameMode(0);
         GameManager.playerIsInControl = true;
