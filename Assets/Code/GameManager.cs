@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     Collider2D[] cafeColliders;
     LevelManager levelManager;
     [SerializeField] GameObject cafe, player, cafeMainRoom;
+    [SerializeField] PlayableDirector cutsceneManager;
 
 
     void Start()
@@ -63,9 +65,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Update()
+    public static void PlayCutscene(PlayableAsset cutscene)
     {
-        
+        Instance.cutsceneManager.Play(cutscene);
     }
 
     public static void SetGameMode(int mode)

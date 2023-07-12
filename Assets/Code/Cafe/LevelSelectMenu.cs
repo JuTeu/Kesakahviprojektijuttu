@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 using TMPro;
 
 public class LevelSelectMenu : MonoBehaviour
@@ -11,6 +12,7 @@ public class LevelSelectMenu : MonoBehaviour
     [SerializeField] Image[] itemIcons1, itemIcons2, checkMarks1, checkMarks2;
     [SerializeField] Button startButton;
     [SerializeField] Sprite missingIcon, uncheck, check;
+    [SerializeField] PlayableAsset enterPortal;
 
     // Näihin pitäisi kyllä keksiä parempi ratkaisu...
     string startText = "Aloita";
@@ -29,9 +31,7 @@ public class LevelSelectMenu : MonoBehaviour
         playerMover = GameObject.FindWithTag("Player").GetComponent<PlayerMover>();
         currentLevel = GameManager.currentLevel;
         levelCount = GameManager.levels.Length - 1;
-        title2.text = levelName[currentLevel];
-        SetIcons(itemIcons2, 0);
-        SetChecks(checkMarks2, itemIcons2, percent2, 0);
+        SetPageContents(checkMarks2, itemIcons2, percent2, title2, 0);
     }
 
     void Update()
@@ -47,33 +47,22 @@ public class LevelSelectMenu : MonoBehaviour
             GameManager.CloseLevel("LevelSelectMenu");
             GameManager.currentLevel = currentLevel;
             GameManager.playerIsReturningFromPortal = false;
-            GameManager.playerIsInControl = true;
+            GameManager.PlayCutscene(enterPortal);
+            //GameManager.playerIsInControl = true;
         }
 
         if (playerMover.GetMoveInput().x < 0 && currentLevel > 0)
         {
-            title1.text = levelName[currentLevel - 1];
-            title2.text = levelName[currentLevel];
-
-            SetIcons(itemIcons1, -1);
-            SetIcons(itemIcons2, 0);
-
-            SetChecks(checkMarks1, itemIcons1, percent1, -1);
-            SetChecks(checkMarks2, itemIcons2, percent2, 0);
+            SetPageContents(checkMarks1, itemIcons1, percent1, title1, -1);
+            SetPageContents(checkMarks2, itemIcons2, percent2, title2, 0);
             
             currentLevel--;
             anim.Play("TurnPageLeft");
         }
         else if (playerMover.GetMoveInput().x > 0 && currentLevel < levelCount)
         {
-            title1.text = levelName[currentLevel];
-            title2.text = levelName[currentLevel + 1];
-
-            SetIcons(itemIcons1, 0);
-            SetIcons(itemIcons2, 1);
-
-            SetChecks(checkMarks1, itemIcons1, percent1, 0);
-            SetChecks(checkMarks2, itemIcons2, percent2, 1);
+            SetPageContents(checkMarks1, itemIcons1, percent1, title1, 0);
+            SetPageContents(checkMarks2, itemIcons2, percent2, title2, 1);
 
             currentLevel++;
             anim.Play("TurnPageRight");
@@ -82,13 +71,20 @@ public class LevelSelectMenu : MonoBehaviour
 
     public void PageTurned()
     {
-        title2.text = levelName[currentLevel];
-        SetIcons(itemIcons2, 0);
-        SetChecks(checkMarks2, itemIcons2, percent2, 0);
+        SetPageContents(checkMarks2, itemIcons2, percent2, title2, 0);
     }
 
-    void SetIcons(Image[] itemIcons, int offset)
+    void SetPageContents(Image[] checkMarks, Image[] itemIcons, TextMeshProUGUI percent, TextMeshProUGUI title, int offset)
     {
+        if (levelName.Length > currentLevel + offset)
+        {
+            title.text = levelName[currentLevel + offset];
+        }
+        else
+        {
+            title.text = "TITLE_MISSING";
+            Debug.LogError("Kentälle ei ole määritelty nimeä LevelSelectMenu.cs skriptissä!");
+        }
         for (int i = 0; i < itemIcons.Length; i++)
         {
             newIcon = GameManager.GetCollectibleSprite((currentLevel + offset) * 4 + i, true);
@@ -101,10 +97,6 @@ public class LevelSelectMenu : MonoBehaviour
                 itemIcons[i].sprite = missingIcon;
             }
         }
-    }
-
-    void SetChecks(Image[] checkMarks, Image[] itemIcons, TextMeshProUGUI percent, int offset)
-    {
 
         bool mainIcon = (GameManager.levels[currentLevel + offset] & 0b_10) == 0b_10;
         bool collectibleIcon1 = (GameManager.levels[currentLevel + offset] & 0b_100) == 0b_100;

@@ -16,10 +16,10 @@ public class PortalTest : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && animate && !GameManager.playerIsReturningFromPortal)
+        /*if(collision.tag == "Player" && animate && !GameManager.playerIsReturningFromPortal)
         {
             anim.Play("PortalOpen");
-        }
+        }*/
 
         playerIsNear = true;
     }
@@ -28,7 +28,7 @@ public class PortalTest : MonoBehaviour
     {
         playerIsNear = false;
         
-        if(collision.tag == "Player" && animate && !GameManager.playerIsReturningFromPortal)
+        /*if(collision.tag == "Player" && animate && !GameManager.playerIsReturningFromPortal)
         {
             anim.Play("PortalClose");
         }
@@ -37,9 +37,21 @@ public class PortalTest : MonoBehaviour
         {
             //GameManager.playerIsReturningFromPortal = false;
             animate = true;
-        }
+        }*/
 
         
+    }
+
+    public void PlayAnim(int id)
+    {
+        if (id == 0)
+        {
+            anim.Play("PortalOpen");
+        }
+        else if (id == 1)
+        {
+            
+        }
     }
 
     void Update()
