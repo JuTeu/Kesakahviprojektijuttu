@@ -20,7 +20,7 @@ public class SolarSystem : MonoBehaviour
         //2D
         axis = new Vector3(0, 0, Random.Range(0f, 0.5f));
 
-        speed = Random.Range(1f, 3f);
+        speed = Random.Range(1f, 1.5f);
         
     }
 

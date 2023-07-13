@@ -13,7 +13,8 @@ public class DeathPit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player.transform.position = respawnPoint.position;
+            //            player.transform.position = respawnPoint.position;
+            other.gameObject.transform.position = respawnPoint.position;
 
             // lis‰t‰‰n ‰‰ni
             float delay = 0;
